@@ -1,0 +1,11 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/robertttamayo/bobblog2.git"
+        }
+    ],
+    "require": {
+        "rtamayo/bobblog": "~0.0"
+    }
+}

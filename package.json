@@ -1,0 +1,17 @@
+{
+    "name": "RedCodeBlueCode",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "~0.4.5",
+        "grunt-contrib-concat": "latest",
+        "grunt-contrib-uglify": "latest",
+        "grunt-contrib-watch": "latest",
+        "grunt-contrib-htmlmin": "latest",
+        "grunt-contrib-cssmin": "latest",
+        "grunt-contrib-copy": "latest",
+        "grunt-contrib-imagemin": "latest",
+        "grunt-contrib-jshint": "latest",
+        "grunt-phpcs": "latest",
+        "grunt-contrib-sass": "latest"
+    }
+}
