@@ -1,0 +1,183 @@
+body {
+    font-family: $sans;
+    min-height: 500px;
+    * {
+        box-sizing: border-box;
+    }
+}
+.top {
+    @include flex();
+    @include flex-direction(row);
+    @include justify-content(space-between);
+}
+.items {
+    @include flex();
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    
+    width: 100px;
+    .icon {
+        width: 25px;
+        height: 25px;
+        background-size: cover;
+        background-position: center center;
+    }
+    .sword {
+        background-image: url(/assets/images/sword.svg);
+    }
+    .shield {
+        background-image: url(/assets/images/shield.svg);
+    }
+    .coffee {
+        background-image: url(/assets/images/coffee.svg);
+    }
+}
+.hearts {
+    @include flex();
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    
+    width: 100px;
+    .heart {
+        width: 25px;
+        height: 25px;
+        background-size: cover;
+        background-position: center center;
+        &.full {
+            background-image: url(/assets/images/heart.svg);
+        }
+        &.empty {
+            background-image: url(/assets/images/heart_empty.svg);
+        }
+    }
+}
+.cloud {
+    position: absolute;
+    
+    background-size: cover;
+    background-position: center center;
+    background-image: url(/assets/images/cloud.svg);
+    
+    height: 70px;
+    width: 70px;
+    right: -70px;
+    
+    top: 100px;
+    z-index: 0;
+    
+    &.double {
+        width: 80px;
+        height: 80px;
+        background-image: url(/assets/images/cloud2.svg);
+        right: -80px;
+    }
+    transition: right 60s linear;
+    &.running {
+        right: 100%;
+    }
+}
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    top: 0;
+    z-index: -1;
+    background: #fff;
+}
+.ground {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    border-top: 4px solid black;
+    background: #ddd;
+}
+.title-wrap {
+    @include flex();
+    @include justify-content(center);
+    @include align-items(center);
+    
+    border: $pixel solid black;
+    margin: auto;
+    width: 500px;
+    height: 200px;
+    background: #f2f2f2;
+    
+    position: relative;
+    z-index: 1;
+}
+.title {
+    font-size: 50px;
+    color: black;
+    font-weight: bold;
+    font-family: $special;
+    width: 80%;
+    text-align: left;
+    
+    span {
+        font-weight: 100;
+        color: black;
+        text-align: right;
+        display: block;
+        margin-top: 20px;
+    }
+}
+.title-back {
+    position: absolute;
+    z-index: -1;
+    background: #f2f2f2;
+    
+    &.vert {
+        border-top: $pixel solid black;
+        border-bottom: $pixel solid black;
+        width: 100%;
+        height: calc(100% + 16px);
+    }
+    &.hor {
+        border-right: $pixel solid black;
+        border-left: $pixel solid black;
+        width: calc(100% + 16px);
+        height: 100%;
+    }
+}
+.buttons {
+    @include flex();
+    @include flex-direction(column);
+    @include justify-content(space-between);
+    
+    position: absolute;
+    @include transform(translate(-50%, 0));
+    left: 50%;
+    
+    margin: auto;
+    margin-top: 20px;
+    width: auto;
+    
+    .button-wrap {
+        @include flex();
+        @include flex-direction(row);
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+            background-image: url(/assets/images/mushroom.svg);
+            background-size: cover;
+            background-position: center center;
+            opacity: 0;
+        }
+        &.active {
+            .icon {
+                opacity: 1;
+            }
+        }
+
+    }
+    .button {
+        font-family: $special;
+        font-size: 20px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "8f42a7c4b44d4080c996906eef8a4f81",
+    "packages": [
+        {
+            "name": "rtamayo/bobblog",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robertttamayo/bobblog2.git",
+                "reference": "e07db60ab67fbae0558d2a40db6b58035fe7d4df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robertttamayo/bobblog2/zipball/e07db60ab67fbae0558d2a40db6b58035fe7d4df",
+                "reference": "e07db60ab67fbae0558d2a40db6b58035fe7d4df",
+                "shasum": ""
+            },
+            "type": "library",
+            "license": [
+                "public"
+            ],
+            "description": "Blog Engine",
+            "support": {
+                "source": "https://github.com/robertttamayo/bobblog2/tree/v1.0.0",
+                "issues": "https://github.com/robertttamayo/bobblog2/issues"
+            },
+            "time": "2017-11-13T00:20:16+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

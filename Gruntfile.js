@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'assets/js/min/core.min.js': ['temp/concat.js']
+                    'assets/js/min/core.min.js': ['assets/js/*.js']
                 }
             }
         },
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                     style: 'expanded'
                 },
                 files: {
-                    'assets/css/core.css': 'assets/css/core.scss'
+                    'assets/css/core.css': 'assets/sass/core.scss'
                 }
             }
         },
@@ -42,41 +42,18 @@ module.exports = function(grunt) {
         },
         
         copy: {
-            blog_assets: {
-                expand: true,
-                flatten: true,
-                filter: 'isFile',
-                src: 'vendor/rioseo/ps-lib-hours/assets/js/*',
-                dest: 'assets/js/vendor/'
-                
-            }, 
             blog_core: {
                 expand: true,
                 flatten: false,
-                filter: 'isFile',
-                cwd: 'vendor/b'
-            },
-            hours_model: {
-                expand: true,
-                flatten: false,
-                filter: 'isFile',
-                cwd: 'vendor/rioseo/ps-lib-hours/includes/model/',
+                cwd: 'vendor/rtamayo/bobblog/',
                 src: '**',
-                dest: 'includes/model/vendor/'
-            }, 
-            hours_view: {
-                expand: true,
-                flatten: false,
-                filter: 'isFile',
-                cwd: 'vendor/rioseo/ps-lib-hours/includes/view/',
-                src: '**',
-                dest: 'includes/view/vendor/'
+                dest: 'blog/'
             }
         },
 
         //run tasks again on changes in js and css files
         watch: {
-          files: ['Gruntfile.js', 'assets/css/*.css', 'assets/css/*.scss', 'assets/css/sass/*.scss'],
+          files: ['Gruntfile.js', 'assets/css/*.css', 'assets/sass/*.scss', 'assets/css/sass/*.scss'],
           tasks: ['uglify', 'sass', 'cssmin', 'copy']
         },
 

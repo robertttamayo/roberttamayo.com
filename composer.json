@@ -6,6 +6,6 @@
         }
     ],
     "require": {
-        "rtamayo/bobblog": "~0.0"
+        "rtamayo/bobblog": "~1.0"
     }
 }
