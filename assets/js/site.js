@@ -14,12 +14,14 @@ var Clouds = (function(Clouds, $) {
         var right = Math.floor(Math.random() * $(window).width());
         var rectangle = new Rectangle();
         var collision = false;
-        console.log('i: ' + i);
+        var testWidth = 80;
+        var testHeight = 80;
         for (var j = 0; j < _clouds.length; j++) {
-            rectangle.set(90, 90, _clouds[j].top, _clouds[j].right);
-//            console.log(rectangle);
-            console.log('j: ' + j);
-            collision = rectangle.contains(top, right);
+            rectangle.set(testWidth, testHeight, _clouds[j].top, _clouds[j].right);
+            collision = rectangle.contains(top, right) || 
+                rectangle.contains(top + testHeight, right) || 
+                rectangle.contains(top, right + testWidth) || 
+                rectangle.contains(top + testHeight, right + testWidth);
             if (collision) {
                 break;
             }
@@ -41,7 +43,18 @@ var Clouds = (function(Clouds, $) {
         div.appendTo($('body'));
     }
     console.log('collisions: ' + collisions);
-    
+    var _cloudElems = $('.cloud');
+    var cloudChecker = window.setInterval(checkClouds, 500);
+    function checkClouds() {
+        _cloudElems.addClass('running');
+        
+        _cloudElems.each(function(){
+            if ($(this).offset().left < 0 - $(this).width()) {
+                $(this).removeClass('running');
+                $(this).css('transform', 'translate(0, 0)');
+            }
+        });
+    }
 }(Clouds || {}, jQuery));
     
 

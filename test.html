@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Red Code Blue Code | Robert Tamayo's Web and Mobile Portfolio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700,900" rel="stylesheet">
+    </head>
+    <body>
+        <div class="circle-wrap">
+            <div class="under">under</div>
+            <div class="construction">construction</div>
+            <div class="circle red">
+                <div class="inner">
+                    <div class="inner-inner"></div>
+                </div>
+            </div>
+            <div class="circle blue">
+                <div class="inner">
+                    <div class="inner-inner"></div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            body * {
+                box-sizing: border-box;
+                font-family: 'Roboto', sans-serif;
+            }
+            .circle-wrap {
+                position: fixed;
+                width: 300px;
+                height: 200px;
+                
+                top: 50%;
+                left: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+            .under {
+                color: #ffc9b7;
+                position: absolute;
+                left: 58px;
+                top: 75px;
+                z-index: 10;
+                -webkit-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                font-weight: 400;
+                font-size: 16px;
+            }
+            .construction {
+                color: #00759c;
+                position: absolute;
+                right: 100px;
+                top: 100px;
+                z-index: 10;
+                -webkit-transform: translate(50%, -50%);
+                -ms-transform: translate(50%, -50%);
+                transform: translate(50%, -50%);
+                font-weight: 100;
+                font-size: 24px;
+            }
+            .circle {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                position:absolute;
+
+                animation: spinner 8s infinite linear;
+            }
+            .circle.red {
+                top: 25px;
+                left: 8px;
+                width: 100px;
+                height: 100px;
+                border: 6px dashed #cf3400;
+                border: 6px dashed #ffc9b7;
+
+                animation: reverse-spinner 4s infinite linear;
+            }
+            .circle.blue {
+                top: 0;
+                right: 0;
+                border: 10px dashed #b4ecff;
+                border: 10px dashed #00759c;
+            }
+            .circle .inner {
+                position: absolute;
+                top: -1px;
+                left: -1px;
+                border-radius: 50%;
+                width: calc(100% + 2px);
+                height: calc(100% + 2px);
+            }
+            .circle.red .inner {
+                background: #cf3400;
+                background: #ffc9b7;
+            }
+            .circle.blue .inner {
+                background: #b4ecff;
+                background: #00759c;
+            }
+            .circle .inner-inner {
+                width: calc(100% - 8px);
+                height: calc(100% - 8px);
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                border-radius: 50%;
+            }
+            .circle.red .inner-inner {
+                background: #cf3400;
+            }
+            .circle.blue .inner-inner {
+                background: #b4ecff;
+            }
+            @keyframes spinner {
+                from { 
+                    -moz-transform: rotate(0deg); 
+                    -ms-transform: rotate(0deg); 
+                    -webkit-transform: rotate(0deg); 
+                    transform: rotate(0deg); 
+                }
+                to { 
+                    -moz-transform: rotate(359deg); 
+                    -ms-transform: rotate(359deg); 
+                    -webkit-transform: rotate(359deg); 
+                    transform: rotate(359deg); 
+                }
+            }
+            @keyframes reverse-spinner {
+                from { 
+                    -moz-transform: rotate(359deg); 
+                    -ms-transform: rotate(359deg); 
+                    -webkit-transform: rotate(359deg); 
+                    transform: rotate(359deg); 
+                }
+                to { 
+                    -moz-transform: rotate(0deg); 
+                    -ms-transform: rotate(0deg); 
+                    -webkit-transform: rotate(0deg); 
+                    transform: rotate(0deg); 
+                }
+            }
+        </style>
+    </body>
+</html>

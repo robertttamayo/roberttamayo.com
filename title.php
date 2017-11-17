@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Hind|Press+Start+2P" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://www.roberttamayo.com/assets/css/core.css">
 </head>
@@ -34,12 +35,18 @@
         </div>
         <div class="button-wrap">
             <div class="icon"></div>
+            <div class="button">Blog</div>
+        </div>
+        <div class="button-wrap">
+            <div class="icon"></div>
             <div class="button">R&eacute;sum&eacute;</div>
         </div>
+        
     </div>
     
     <div class="background"></div>
     <div class="ground"></div>
+<!--    <div class="dino"></div>-->
     <div class="mountains">
         <div class="mountain"></div>
         <div class="mountain"></div>

@@ -1,6 +1,10 @@
 body {
   font-family: "Hind", sans-serif;
-  min-height: 500px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
 }
 body * {
   box-sizing: border-box;
@@ -87,7 +91,6 @@ body * {
   right: -70px;
   top: 100px;
   z-index: 0;
-  transition: right 60s linear;
 }
 .cloud.double {
   width: 80px;
@@ -96,7 +99,8 @@ body * {
   right: -80px;
 }
 .cloud.running {
-  right: 100%;
+  transition: right 90s linear;
+  right: calc(100% + 1px);
 }
 
 .background {
@@ -105,6 +109,7 @@ body * {
   height: 100%;
   pointer-events: none;
   top: 0;
+  left: 0;
   z-index: -1;
   background: #fff;
 }
@@ -135,6 +140,7 @@ body * {
   margin: auto;
   width: 500px;
   height: 200px;
+  margin-top: 40px;
   background: #f2f2f2;
   position: relative;
   z-index: 1;
@@ -221,6 +227,41 @@ body * {
   font-size: 20px;
   padding: 10px;
   margin-bottom: 20px;
+}
+
+.dino {
+  position: absolute;
+  top: 500px;
+  left: 50px;
+  width: 50px;
+  height: 50px;
+  background-image: url(/assets/images/dino.png);
+  background-size: cover;
+  background-position: center center;
+}
+
+@media (max-width: 768px) {
+  .cloud {
+    position: fixed;
+  }
+
+  .title-wrap {
+    margin: auto;
+    margin-top: 40px;
+    opacity: .9;
+  }
+}
+@media (max-width: 540px) {
+  .title-wrap {
+    width: calc(100% - 20px);
+    height: auto;
+  }
+
+  .title {
+    font-size: 30px;
+    width: 90%;
+    padding: 40px 0;
+  }
 }
 
 /*# sourceMappingURL=core.css.map */
