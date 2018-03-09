@@ -53,7 +53,7 @@ module.exports = function(grunt) {
 
         //run tasks again on changes in js and css files
         watch: {
-          files: ['Gruntfile.js', 'assets/css/*.css', 'assets/sass/*.scss', 'assets/css/sass/*.scss'],
+          files: ['Gruntfile.js', 'assets/css/*.css', 'assets/sass/*.scss', 'assets/css/sass/*.scss', 'assets/js/*.js'],
           tasks: ['uglify', 'sass', 'cssmin', 'copy']
         },
 

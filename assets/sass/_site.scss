@@ -27,13 +27,13 @@ body {
         background-position: center center;
     }
     .sword {
-        background-image: url(/assets/images/sword.svg);
+        background-image: url(/assets/images/sword.png);
     }
     .shield {
-        background-image: url(/assets/images/shield.svg);
+        background-image: url(/assets/images/shield.png);
     }
     .coffee {
-        background-image: url(/assets/images/coffee.svg);
+        background-image: url(/assets/images/coffee.png);
     }
 }
 .hearts {
@@ -48,10 +48,10 @@ body {
         background-size: cover;
         background-position: center center;
         &.full {
-            background-image: url(/assets/images/heart.svg);
+            background-image: url(/assets/images/heart.png);
         }
         &.empty {
-            background-image: url(/assets/images/heart_empty.svg);
+            background-image: url(/assets/images/heart_empty.png);
         }
     }
 }
@@ -60,7 +60,7 @@ body {
     
     background-size: cover;
     background-position: center center;
-    background-image: url(/assets/images/cloud.svg);
+    background-image: url(/assets/images/cloud.png);
     
     height: 70px;
     width: 70px;
@@ -72,7 +72,7 @@ body {
     &.double {
         width: 80px;
         height: 80px;
-        background-image: url(/assets/images/cloud2.svg);
+        background-image: url(/assets/images/clouds.png);
         right: -80px;
     }
     
@@ -90,16 +90,18 @@ body {
     top: 0;
     left: 0;
     z-index: -1;
-    background: #fff;
+//    background: #fff;
+    background: #87ceeb;
 }
 .ground {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 20%;
+    height: 10%;
     border-top: 4px solid black;
-    background: #ddd;
+//    background: #ddd;
+    background: #56b000;
 }
 .title-wrap {
     @include flex();
@@ -136,6 +138,7 @@ body {
     position: absolute;
     z-index: -1;
     background: #f2f2f2;
+    background: #ffd700;
     
     &.vert {
         border-top: $pixel solid black;
@@ -149,6 +152,10 @@ body {
         width: calc(100% + 16px);
         height: 100%;
     }
+}
+a.button-wrap, a.button-wrap .button {
+    text-decoration: none;
+    color: black;
 }
 .buttons {
     @include flex();
@@ -167,10 +174,13 @@ body {
         @include flex();
         @include flex-direction(row);
         
+        text-decoration: none;
+        color: black;
+        
         .icon {
             width: 30px;
             height: 30px;
-            background-image: url(/assets/images/mushroom.svg);
+            background-image: url(/assets/images/coffee.png);
             background-size: cover;
             background-position: center center;
             opacity: 0;
@@ -180,7 +190,7 @@ body {
                 opacity: 1;
             }
         }
-
+        
     }
     .button {
         font-family: $special;
@@ -189,6 +199,25 @@ body {
         margin-bottom: 20px;
     }
 }
+body {
+    &.night {
+        .background {
+            background: midnightblue;
+        }
+        .ground {
+            background: #004100;
+        }
+        .cloud {
+            opacity: .5;
+        }
+        .title-back {
+            background: palegoldenrod;
+        }
+    }
+}
+
+
+
 .dino {
     position: absolute;
     top: 500px;
@@ -226,3 +255,58 @@ body {
     }
     
 }
+
+body.page-about {
+    background: black;
+    color: goldenrod;
+    perspective: 400px;
+    position: relative;
+}
+.about-title {
+    font-family: 'Audiowide', cursive;
+    font-size: 0px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+    animation: flyaway 10s;
+}
+.main-text-wrap {
+    width: 70%;
+    bottom: 0;
+    left: 50%;
+    height: 50vh;
+    position: absolute;
+    margin: auto;
+    overflow: visible;
+    transform: rotateX(45deg) translate(-50%, 50vh);
+    transition: transform linear .2s;
+    
+    .main-text-p {
+        font-size: 25px;
+    }
+    h1 {
+        text-align: center;
+        font-size: 32px;
+    }
+}
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    
+    &.twinkle {
+        animation: twinkle 2s infinite;
+    }
+}
+@keyframes flyaway {
+    0% {font-size: 80px;}
+    100% {font-size: 0px;}
+}
+@keyframes twinkle {
+    0% {opacity: 1}
+    25% {opacity: .35}
+    100% {opacity: 1}
+}
+
