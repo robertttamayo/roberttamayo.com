@@ -351,6 +351,11 @@ body.page-about {
     opacity: 1;
   }
 }
+.night a.button-wrap .button,
+.night a.button-wrap {
+  color: #ddd;
+}
+
 .page-resume {
   background: #efefef;
 }

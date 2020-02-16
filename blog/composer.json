@@ -1,0 +1,9 @@
+{ 
+    "name": "rtamayo/bobblog", 
+    "description": "Blog Engine", 
+    "license": "public", 
+     
+    "require": { 
+ 
+    } 
+}

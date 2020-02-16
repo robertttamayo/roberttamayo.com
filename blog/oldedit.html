@@ -1,0 +1,1290 @@
+<?php
+require("rdconfig.php");
+$postid;
+if (!isset($_SESSION['userID'])) {
+    header("Location: http://www.thenoticed.com/rdlogin.php");
+    exit();
+}
+if(!isset($_GET['postid'])){
+    header("Location: " . $bloghome); 
+    
+} else {
+    $postid = $_GET['postid'];
+}
+$initializer = new BlogPostInitializer();
+$blogpost = $initializer->initializeSoloForEdit($postid);
+
+$draft = false;
+if ($blogpost->ispublished == "published"){
+    $draft = false;
+} else {
+    $draft = true;
+}
+$writer = new EditPostWriter();
+$writer->writepre($blogpost);
+if ($draft) {
+    $writer->writedraft($blogpost);
+} else {
+    $writer->writepost($blogpost);
+}
+$writer->writeafter($blogpost);
+
+
+//$writer = new BlogPostPublicWriter();
+//$writer->writeOptions($blogpost);
+class EditPostWriter {
+    function writepre($blogpost){
+        $postid = $blogpost->postid;
+        $ispublished = $blogpost->ispublished;
+print <<<CITE
+<html lang="en-US">
+     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=false;" />
+        <title>The Noticed</title>
+        <link rel="stylesheet" type="text/css" href="bobblog.css">
+        <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script>
+            
+        </script>
+    </head>
+<body onload="" class="bob-body">
+        <script type="text/javascript" src="rdscripts.js"></script>
+        <script type="text/javascript" src="textedit.js"></script>
+        <div class="top-container">
+            <div id="bob-blog">
+            bob<br>blog
+            </div>
+        </div>
+        <hr>
+
+CITE;
+    }
+    function writeafter($blogpost){
+        $filename = $blogpost->filename;
+print <<<CITE
+
+<div class="edit-container">
+
+            <div class="edit-item">
+                <a id="writer-type">Normal</a>
+                <ul class="drop-edit-list">
+                    <li><button class="drop-button" id="header" onclick="changeWriter(&#34;header&#34;);">Heading</button></li>
+                    <li><button class="drop-button" id="normal" onclick="changeWriter(&#34;normal&#34;);">Normal</button></li>
+                </ul>
+            </div>
+            <div class="edit-item">
+                <button id="undo" type="button" onclick="myUndo();" style="font-size: large;">&larrhk;</button>
+                <button id="redo" type="button" onclick="myRedo()"style="font-size: large">&rarrhk;</button>
+            </div>
+            <div class="edit-item">
+                <button id="italic" type="button" onclick="modifyWith(&#34;I&#34;);"><i>i</i></button>
+                <button id="bold" type="button" onclick="modifyWith(&#34;B&#34;);"><b>b</b></button>
+                <button id="underline" type="button" onclick="modifyWith(&#34;U&#34;);"><u>u</u></button>
+                <button id="strike" type="button" onclick="modifyWith(&#34;STRIKE&#34;);"><strike>abc</strike></button>
+            </div>
+            <div class="edit-item">
+                <a>Align</a>
+                <ul class="drop-edit-list">
+                    <li><button class="drop-button" id="left" onclick="changeTextAlign(&#34;left&#34;);">Left</button></li>
+                    <li><button class="drop-button" id="center" onclick="changeTextAlign(&#34;center&#34;);">Center</button></li>
+                    <li><button class="drop-button" id="right" onclick="changeTextAlign(&#34;right&#34;);">Right</button></li>
+                    <li><button class="drop-button" id="justify" onclick="changeTextAlign(&#34;justify&#34;);">Justify</button></li>
+                </ul>
+            </div>
+
+            <!--<div class="edit-item">
+                <button id="ol" type="button" onclick="addList(true);">OL</button>
+                <button id="ul" type="button" onclick="addList(false);">UL</button>
+                <button id="block" type="button" onclick="addBlockquote();"><b>&#34;  &#34;</b></button>
+            </div>-->
+
+            <div class="edit-item">
+                <!--<button id="image" type="button" onclick="showLinkDialog();">Link</button>-->
+                <button id="image" type="button" onclick="showDialog();">Img</button>
+                <!--<button id="image" type="button" onclick="showVideoDialog();">Video</button>-->
+            </div>
+        </div> <!--end edit container-->
+
+<button type="button" id="conduit-undo" onclick="addUndoState()" style="position: absolute; top: -100em;"></button>
+        <button type="button" id="conduit-init" onclick="initCurrentState()" style="position: absolute; top: -105em;"></button>
+        <span id="postid-hidden" style="position: absolute; top: -110em; display: none;"></span>
+        <dialog id="img-dialog">
+            <div class="dialog-container">
+                <p style="text-align: center;">Please choose an image to upload</p>
+                <div style="width: 120px; height: 120px; display: block; border: 1px dotted black; position: relative; padding: 1px;
+                            text-align: center;">
+                    <img id="upload-preview" src="" alt="image preview" style="max-height: 100%; max-width: 100%; object-fit: contain;
+                        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                </div>
+                <div>
+                    <form method="post" id="image-form" name="image-form" onsubmit="return closeDialog()"
+                          onchange="uploadPreview(document.getElementById('upload-image-holder').value);">
+                        <input type="file" accept="image/*" name="imgfile[]" id="upload-image-holder">
+                </div>
+                <div>
+                    <button class="exit-dialog" type="submit">Done</button>
+                    <button class="exit-dialog" type="button" onclick="cancelDialog()">Cancel</button>
+                </div>
+                    </form>
+            </div>
+        </dialog>
+        
+        <iframe id="frame" frameBorder="0"  src="content.php?filename=$filename"></iframe>
+        <div id="preview"></div>
+        <div id="underhood"></div>
+CITE;
+    }
+    function writedraft($blogpost){
+    $title = $blogpost->title;
+        $postid = $blogpost->postid;
+print <<<CITE
+
+
+        <div class="post-options-container">
+            <div class="post-options-item subtitle">
+                The Noticed<br><span class="post-options-span">BLOG POST</span>
+            </div>
+            <div class="post-options-item">
+                <input type="text" value="$title" id="title" required>
+            </div>
+            <div class="post-options-item">
+                <button type="button" class="publish-button" id="post-blog" onclick="publishDraft('$postid')">PUBLISH</button>
+                <button type="button" class="options-save-button" id="options-save" onclick="save('$postid')">SAVE</button>
+                <button type="button" class="options-preview-button" onclick="visitPost('$postid')">PREVIEW</button>
+                <button type="button" class="exit-button" onclick="exitNoSave()">EXIT</button>
+            </div>
+        </div>
+        
+        
+CITE;
+    }
+    function writepost($blogpost){
+        $title = $blogpost->title;
+        $postid = $blogpost->postid;
+print <<<CITE
+
+
+        <div class="post-options-container">
+            <div class="post-options-item subtitle">
+                The Noticed<br><span class="post-options-span">BLOG POST</span>
+            </div>
+            <div class="post-options-item">
+                <input type="text" value="$title" id="title" required>
+            </div>
+            <div class="post-options-item">
+                <button type="button" class="publish-button" id="post-blog" onclick="updatePost('$postid')">UPDATE</button>
+                <button type="button" class="options-save-button" id="options-save" onclick="makeDraft('$postid')">DRAFT</button>
+                <button type="button" class="options-preview-button" onclick="visitPost('$postid')">VIEW</button>
+                <button type="button" class="exit-button" onclick="exitNoSave()">EXIT</button>
+            </div>
+        </div>
+        
+CITE;
+    }
+    function writescript($blogpost){
+print <<<CITE
+
+
+
+CITE;
+    }
+    function readContentHTML($blogpost){
+        $filename = $blogpost->filename;
+        $file = fopen($filename, "r") or die("Unable to open file!");
+        $postcontent = fread($file,filesize($filename));
+        fclose($file);
+        
+        $src =  <<<CITE
+        
+<html lang="en-US">
+     <head>
+        <link rel="stylesheet" type="text/css" href="bobblog.css">
+        <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="" />
+    </head>
+    <!--<body style="width: inherit; min-width: 500px;" class="blog-compose" onload="initCurrentState()">-->
+        <body class="blog-compose" onload="initCurrentState()">
+        <div contenteditable="true" id="content" onmouseup="adjustEditButtons()" onkeypress="checkEnter(event)" onkeyup="resetUndoTimer()">$postcontent
+</div> 
+        <script id="main-js-copy" src="imgedit.js"></script>
+<script>
+    var italic = "I";
+    var bold = "B";
+    var underline = "U";
+    var strike = "STRIKE";
+    
+    function mainJs(){
+        alert("content calling mainJs");
+        var js;
+        var text;
+        
+        for (var i = 0; i < window.top.document.scripts.length; i++) {
+            js = window.top.document.scripts[i];
+            if (js.id == "main-js") {
+                text = document.createTextNode(js.text);
+                document.getElementById("main-js-copy").appendChild(text);
+            }
+        }
+        
+    }
+    function adjustEditButtons() {
+        //alert("content calling adjustEditButtons()");
+        if (window.getSelection() == null) {
+            alert("window selection is null");
+        }
+        if (window.getSelection().rangeCount == 0) {
+            return;
+        }
+        var pDocument = window.top.document;
+        var selection = window.getSelection();
+        var range = selection.getRangeAt(0);
+        var anode = range.startContainer;
+        var isWriterH3 = hasParentOf(anode, "H3");
+        var hasItalic = hasParentOf(anode, italic);
+        var hasBold = hasParentOf(anode, bold);
+        var hasUnderline = hasParentOf(anode, underline);
+        var hasStrike = hasParentOf(anode, strike);
+        if (hasItalic) {
+            pDocument.getElementById("italic").style.backgroundColor = "#dcdcdc";
+        } else {
+            pDocument.getElementById("italic").style.backgroundColor = "white";
+        }
+        if (hasBold) {
+            pDocument.getElementById("bold").style.backgroundColor = "#dcdcdc";
+        } else {
+            pDocument.getElementById("bold").style.backgroundColor = "white";
+        }
+        if (hasUnderline) {
+            pDocument.getElementById("underline").style.backgroundColor = "#dcdcdc";
+        } else {
+            pDocument.getElementById("underline").style.backgroundColor = "white";
+        }
+        if (hasStrike) {
+            pDocument.getElementById("strike").style.backgroundColor = "#dcdcdc";
+        } else {
+            pDocument.getElementById("strike").style.backgroundColor = "white";
+        }
+        if (isWriterH3) {
+            pDocument.getElementById("writer-type").innerHTML = "Header";
+        } else {
+            pDocument.getElementById("writer-type").innerHTML = "Normal";
+        }
+        if (document.getElementById("selection") != null) {
+            removeSpanContents(document.getElementById("selection"));
+            removeAllSpanElementContents();
+        }
+    }
+    function hasParentOf(anode, property) {
+        //alert("content calling hasParentOf");
+        if (anode.parentNode) {
+            if (anode.parentNode.nodeName === property) {
+                return true;
+            } else if (isNodeNameSpecial(anode.parentNode)) {
+                return hasParentOf(anode.parentNode, property);
+            } else if (anode.nodeName === property) {
+                return true;
+            }
+        } else if (anode.nodeName === property) {
+            return true;
+        }
+        return false;
+    }
+    function isNodeNameSpecial(node){
+        //alert("content calling isNodeNameSpecial");
+        return (
+            node.nodeName === bold ||
+            node.nodeName === italic ||
+            node.nodeName === underline ||
+            node.nodeName === strike ||
+            node.nodeName === "SPAN" ||
+            node.nodeName === "A"
+               );
+    }
+    function removeAllSpanElementContents(){
+        alert("content calling removeAllSpanElementContents");
+        var spans = document.getElementsByClassName("select-class");
+        var span;
+        var range;
+        var contents;
+        for (var i = 0; i < spans.length; i++) {
+            span = spans[i];
+            range = document.createRange();
+            range.selectNodeContents(span);
+            contents = range.extractContents();
+            range.setStartBefore(span);
+            range.insertNode(contents);
+            span.parentNode.removeChild(span);
+        }
+    }
+    function removeSpanContents(span){
+        alert("content calling removeSpanContents");
+        var range = document.createRange();
+        range.selectNodeContents(span);
+        var contents = range.extractContents();
+        range.setStartBefore(span);
+        range.insertNode(contents);
+        span.parentNode.removeChild(span);
+        //if (document.getElementById("selection") == null) alert("success!");
+    }
+    var lastKeyUp;
+    var undoTimer;
+    function resetUndoTimer(){
+        //alert("content calling resetUndoTimer");
+        clearTimeout(undoTimer);
+        undoTimer = setTimeout("callAddUndoState()", 500);
+    }
+    function callAddUndoState(){
+        //alert("content calling callAddUndoState");
+        window.top.document.getElementById("conduit-undo").click();
+    }
+    function initCurrentState(){
+        //alert("content calling initCurrentState");
+        window.top.document.getElementById("conduit-init").click();
+    }
+    function checkEnter(e){
+        //alert("content calling checkEnter");
+        return;
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code == 13) { //Enter keycode
+            cancelEvent(e);
+            var selection = window.getSelection();
+            var range = selection.getRangeAt(0);
+            var contents = range.extractContents();
+            
+            var br;
+            var hasList = hasParentOf(range.startContainer, "LI");
+            var masterList;
+            var endList = false;
+            if (hasList) {
+                var ordered = hasParentOf(range.startContainer, "OL");
+                if (!ordered) {
+                    masterList = findParentOf(range.startContainer, "UL");
+                } else {
+                    masterList = findParentOf(range.startContainer, "OL");
+                }
+                var listItem = findParentOf(range.startContainer, "LI");
+                if (listItem.textContent === "" || !listItem.hasChildNodes()) {
+                    //alert("doing what I want to happen here");
+                    br = document.createElement("BR");
+                    listItem.parentNode.removeChild(listItem);
+                    range.setStartAfter(masterList);
+                    endList = true;
+                } else {
+                    //alert("doing else");
+                    br = document.createElement("LI");
+                    range.setStartAfter(listItem);
+                }
+            } else {
+                br = document.createElement("BR");
+            }
+            //var contents = range.extractContents();
+            
+            contents.appendChild(br);
+            range.insertNode(contents);
+            if (endList) {
+                range.setStartAfter(masterList);
+                range.setEndAfter(masterList);
+            } else if (hasList) {
+                range.selectNodeContents(br);
+            } else {
+                range.setStartAfter(br);
+                range.setEndAfter(br);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    }
+    function cancelEvent(e){  
+        alert("content calling cancelEvent");
+      try {
+          e.preventDefault(true);
+          e.stopPropagation(true);
+          e.stopped = true;
+      } catch (err) {}
+    }
+    function findParentOf(node, name) {
+        alert("content calling findParentOf");
+        if (node.nodeName === name) {
+            return node;
+        }
+        if (node.parentNode) {
+            return findParentOf(node.parentNode, name);
+        }
+        return null;
+    }
+</script>
+    </body>
+</html>
+CITE;
+        return $src;
+    }
+}
+class BlogPostInitializer {
+    
+    function initialize(){
+        global $server;
+        global $dbname;
+        global $username;
+        global $password;
+        try {
+        $con = new PDO("mysql:host=$server;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $query = "SELECT * FROM blogpost";
+
+        $result = $con->query($query);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        $blogposts = array(); //blog post is an array of BlogPost objects
+        $i = 0;
+        $size = 0;
+        foreach($result as $row){
+            $blogpost = new BlogPost();
+            $blogpost->title = $row['title'];
+            $blogpost->postid = $row['postid'];
+            $blogpost->author = $row['author'];
+            $blogpost->publishdate = $row['publishdate'];
+            $blogpost->datecreated = $row['datecreated'];
+            $blogpost->isdeleted = $row['isdeleted'];
+            $blogpost->ispublished = $row['ispublished'];
+            $blogpost->filename = $row['filename'];
+            $blogposts[$i] = $blogpost;
+            $i++;
+            $size = $i;
+        }
+        
+
+        } catch(PDOException $e) {
+            echo "Fail: " . $e->getMessage();
+        }
+        return $blogposts;
+    }
+    function initializeSolo($postid){
+        global $server;
+        global $dbname;
+        global $username;
+        global $password;
+        try {
+        $con = new PDO("mysql:host=$server;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM blogpost WHERE postid = :postid";
+        $stmt = $con->prepare($sql);
+        $stmt->bindParam(':postid', $postid);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        if (sizeof($result) == 1) {
+            //success
+            foreach($result as $row){
+                $blogpost = new BlogPost();
+                $blogpost->title = $row['title'];
+                $blogpost->postid = $row['postid'];
+                $blogpost->author = $row['author'];
+                $blogpost->publishdate = $row['publishdate'];
+                $blogpost->datecreated = $row['datecreated'];
+                $blogpost->isdeleted = $row['isdeleted'];
+                $blogpost->ispublished = $row['ispublished'];
+                $blogpost->filename = $row['filename'];
+                
+                //we want it to not be listed as a draft...
+                $blogpost->ispublished = "published";
+            }
+            
+        } else {
+            //bad login attempt
+            $blogpost = null;
+        }
+        
+
+        } catch(PDOException $e) {
+            echo "Fail: " . $e->getMessage();
+        }
+        return $blogpost;
+    }
+    function initializeSoloForEdit($postid){
+        global $server;
+        global $dbname;
+        global $username;
+        global $password;
+        try {
+        $con = new PDO("mysql:host=$server;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM blogpost WHERE postid = :postid";
+        $stmt = $con->prepare($sql);
+        $stmt->bindParam(':postid', $postid);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        if (sizeof($result) == 1) {
+            //success
+            foreach($result as $row){
+                $blogpost = new BlogPost();
+                $blogpost->title = $row['title'];
+                $blogpost->postid = $row['postid'];
+                $blogpost->author = $row['author'];
+                $blogpost->publishdate = $row['publishdate'];
+                $blogpost->datecreated = $row['datecreated'];
+                $blogpost->isdeleted = $row['isdeleted'];
+                $blogpost->ispublished = $row['ispublished'];
+                $blogpost->filename = $row['filename'];
+
+            }
+            
+        } else {
+            //bad login attempt
+            $blogpost = null;
+        }
+        
+
+        } catch(PDOException $e) {
+            echo "Fail: " . $e->getMessage();
+        }
+        return $blogpost;
+    }
+}
+class BlogPost {
+    public $title = "";
+    public $author = "";
+    public $datecreated = "";
+    public $publishdate = "";
+    public $isdeleted = "";
+    public $ispublished = "";
+    public $postid = "";
+    public $filename = "";
+    
+    function getPublishDate(){
+        return $publishdate;
+    }
+    function getDateCreated(){
+        return $datecreated;
+    }
+}
+?>
+
+    
+        <script id="main-js">
+            var italic = "I";
+            var bold = "B";
+            var underline = "U";
+            var strike = "STRIKE";
+            
+            var highlight = "#b1d7fe";
+            //var hasSelection = false;
+            
+            var grandparent;
+            
+            var undoStates = [];
+            var currentState;
+            var redoStates = [];
+            
+            var tool;
+            var idlist = [];
+            var prefix = "edit-";
+            function visitPost(postId){
+                var target = "http://www.thenoticed.com/rdsolopost.php?postid=" + postId;
+                window.location.href = target;
+            }
+            function simplyModifyRange(range, property, hasProperty){
+                alert("calling simplyModifyRange");
+            }
+            function modifyRange(range, property) {
+                alert("calling modifyRange");
+            }
+            
+            
+            function getPropertyNodes(node, property){
+                alert("calling getPropertyNodes");
+                var child;
+                var propertyNodes = [];
+                var nodes = [];
+                for (var i = 0; i < node.childNodes.length; i++){
+                    child = node.childNodes[i];
+                    if (child.nodeName === property){
+                        propertyNodes.push(child);
+                    } else if (child.hasChildNodes()){
+                        nodes = getPropertyNodes(child, property);
+                        for (var j = 0; j < nodes.length; j++){
+                            propertyNodes.push(nodes[j]);
+                        }
+                    }
+                }
+                return propertyNodes;
+            }
+            
+            
+            
+            
+            function removePropertyold(range, property) {
+                alert("calling removePropertyOld");
+                var propertyNodes = getPropertyNodes(document.getElementById("frame")
+                                             .contentWindow.document.getElementById("content"), property);
+                var propNode;
+                var propRange = document.createRange();
+        
+                for (var i = 0; i < propertyNodes.length; i++){
+                    propNode = propertyNodes[i];
+                    if (range.intersectsNode(propNode)){
+                        var frag = document.createDocumentFragment();
+                        //recursivelyAppendChildNodes(propNode, frag);
+                        //alert("frag: " + frag.textContent + "frag html: " + frag.innerHTML);
+                        //next two lines, it would be better to write a recursive method to append child nodes
+                        //from innermost child upward
+                        frag.innerHTML = propNode.innerHTML;
+                        frag.textContent = propNode.textContent;
+                        //alert("frag ihtml: " + frag.innerHTML);
+                        propNode.parentNode.replaceChild(frag, propNode);
+                    }
+                }
+            }
+            function recursivelyAppendChildNodes(node, replacement){
+                alert("calling recursivelyAppendChildNodes");
+                if (node.hasChildNodes()) {
+                    for (var i = 0; i < node.childNodes.length; i++){
+                        recursivelyAppendChildNodes(node.childNodes[i], replacement);
+                        replacement.appendChild(node.childNodes[i]);
+                    }
+                }
+                //replacement.appendChild(node);
+            }
+            function surroundChildNodes(node, property){
+                alert("surroundChildNodes called");//if i never see the alert, it's okay to remove this method
+                if (node.nodeName === property) {
+                    return;
+                } else {
+                    if (node.hasChildNodes()){
+                        var child;
+                        for (var i = 0; i < node.childNodes.length; i++) {
+                            child = node.childNodes[i];
+                            surroundChildNodes(child, property);
+                        }
+                    } else {
+                        //alert("is text node? nodeName: " + node.nodeName);
+                        var range = document.createRange();
+                        range.selectNode(node);
+                        range.surroundContents(document.createElement(property));
+                        /*
+                        var range = document.createRange();
+                        range.selectNode(node);
+                        var contents = range.extractContents();
+                        var replacer = document.createElement(property);
+                        replacer.appendChild(contents);
+                        range.insertNode(replacer);
+                        */
+                    }
+                }
+            }
+            function extractChildren(node, property){
+                alert("extractChildNodes called");
+                if (node.nodeName === property) {
+                    
+                } else {
+                    if (node.hasChildNodes()) {
+                        for (var i = 0; i < node.childNodes.length; i++) {
+                        child = node.childNodes[i];
+                        extractChildren(child, property);
+                        }
+                    } else {
+                        var range = document.createRange();
+                        range.selectNodeContents(node);
+                        var contents = range.extractContents();
+                        node.parentNode.removeChild(node);
+                        range.insertNode(contents);
+                    }
+                }
+            }
+            function extractFromDiv(node){
+                alert("calling extractFromDiv");
+                if (node.nodeName != "DIV") {
+                    return;
+                }
+                var range = document.createRange();
+                range.selectNodeContents(node);
+                var contents = range.extractContents();
+                if (node.parentNode) {
+                    node.parentNode.removeChild(node);
+                }
+                return contents;
+            }
+            
+            function ridEmptyNodes(range, contents, nodes, node){
+                alert("calling ridEmptyNodes");
+                for (var i = 0; i < nodes.length; i++){
+                    node = nodes[i];
+                    if (node.textContent == "") {
+                        range.selectNodeContents(node);
+                        contents = range.extractContents();
+                        node.parentNode.removeChild(node);
+                        range.insertNode(contents);
+                    }
+                }
+            }
+            function ridEmptySpecialNodes(){
+                alert("calling ridEmptySpecialNodes");
+                var range = document.createRange();
+                var contents;
+                var node;
+                var nodes
+                
+                nodes = document.getElementById("frame").contentWindow.document.getElementsByTagName(bold);
+                ridEmptyNodes(range, contents, nodes, node);
+                nodes = document.getElementById("frame").contentWindow.document.getElementsByTagName(italic);
+                ridEmptyNodes(range, contents, nodes, node);
+                nodes = document.getElementById("frame").contentWindow.document.getElementsByTagName(underline);
+                ridEmptyNodes(range, contents, nodes, node);
+                nodes = document.getElementById("frame").contentWindow.document.getElementsByTagName(strike);
+                ridEmptyNodes(range, contents, nodes, node);
+                
+                for (var i = 0; i < nodes.length; i++){
+                    node = nodes[i];
+                    if (node.textContent == "") {
+                        range.selectNodeContents(node);
+                        contents = range.extractContents();
+                        node.parentNode.removeChild(node);
+                        range.insertNode(contents);
+                    }
+                }
+            }
+            function ridEmptySpans(){
+                alert("calling ridEmptySpans");
+                
+                var range = document.createRange();
+                var contents;
+                var span;
+                var spans = document.getElementById("frame").contentWindow.document.getElementsByClassName("select-class");
+                for (var i = 0; i < spans.length; i++){
+                    span = spans[i];
+                    if (span.textContent == "") {
+                        range.selectNodeContents(span);
+                        contents = range.extractContents();
+                        span.parentNode.removeChild(span);
+                        range.insertNode(contents);
+                    }
+                }
+                ridEmptySpecialNodes();
+            }
+            function hunt(parent){
+                alert("calling hunt");
+                if (!parent.hasChildNodes()) return;
+                if (parent.textContent === "" && parent.nodeName === "DIV") return;
+                var children = parent.childNodes;
+                var child;
+                for (var i = 0; i < children.length; i++) {
+                    child = children[i];
+                    if (child.hasChildNodes()) {
+                        hunt(child);
+                    }
+                    if (isNodeNameSpecial(child)) {
+                        if (child.textContent == ""){
+                            child.parentNode.removeChild(child);
+                        }
+                    }
+                }
+            }
+            function huntEmptyNodes(parent){
+                alert("calling huntEmptyNodes");
+                if (parent.hasChildNodes()) {
+                    hunt(parent);
+                }
+                if (parent.textContent === "" && parent.nodeName === "DIV") return;
+                var children = parent.childNodes;
+                var child;
+                for (var i = 0; i < children.length; i++) {
+                    child = children[i];
+                    if (child.hasChildNodes()) {
+                        hunt(child);
+                    }
+                    if (isNodeNameSpecial(child)) {
+                        if (child.textContent == ""){
+                            child.parentNode.removeChild(child);
+                        }
+                    }
+                }
+            }
+            /*NEED TO IMPLEMENT TEST IF H3 INSTEAD*/
+            function checkRangeDivs(range) {
+                alert("calling checkRangeDivs");
+                var rangeArray;
+                var anode = range.startContainer;
+                var znode = range.endContainer;
+                //alert(znode.nodeName);
+                //is div parent the same div?
+                var adiv = findParentDiv(anode);
+                var zdiv = findParentDiv(znode);
+                //alert("adiv: " + adiv.textContent + "\nzdiv: " + zdiv.textContent);
+                if (adiv == zdiv) {
+                    //good! this is the easy way
+                    rangeArray = [range];
+                    return rangeArray;
+                } else {
+                    var arange = document.createRange();
+                    var zrange = document.createRange();
+                    arange.setStart(anode, range.startOffset);
+                    arange.setEndAfter(adiv);
+                    zrange.setStartBefore(zdiv.firstChild);
+                    //zrange.setStartBefore(zdiv);
+                    //zrange.set(adiv);
+                    zrange.setEnd(znode, range.endOffset);
+                    console.log("zrange: " + zrange);
+                    //at this point, recursively test, but not now
+                    rangeArray = [arange];
+                    
+                    //var innerRange = document.createRange();
+                    var innerRange = range.cloneRange();
+                    //innerRange.selectNode(adiv);
+                    //alert("innerRange: " + innerRange);
+                    var debug;
+                    
+                    innerRange.setStartAfter(adiv);
+                    innerRange.setEndBefore(zdiv);
+                    
+                     innerContents = innerRange.extractContents();
+                    //var debug = document.createElement("DIV");
+                    //debug.appendChild(innerContents);
+                    //alert(debug.innerHTML);
+                    var innerDivs = findInnerDivs(innerContents);
+                    innerRange.insertNode(innerContents);
+                    //var innerDivs = findInnerDivs(innerContents);
+                    //alert(innerDivs.length + " is how many inner divs there are");
+                    //innerRange.insertNode(innerContents);
+                    var divRange = document.createRange();
+                    var divRange = document.createRange();
+                    for (var i = 0; i < innerDivs.length; i++){
+                        
+                        divRange.selectNodeContents(innerDivs[i]);
+                        //divRange.selectNode(innerDivs[i]);
+                        //innerRange.setStartBefore(innerDivs[i].firstChild);
+                        /*
+                        if (innerRange.startContainer.nodeName == "DIV") {
+                            innerRange.setStartBefore(innerRange.startContainer.firstChild);
+                        }
+                        */
+                        //innerRange.setStartAfter(innerDivs[i]);
+                        innerContents = divRange.cloneContents();
+                        debug = document.createElement("DIV");
+                        debug.appendChild(innerContents);
+                        rangeArray.push(divRange.cloneRange());
+                        console.log("divRange[" + i + "]: " + divRange + "\nadding innerDiv[" + i + "]: " + debug.innerHTML);
+                    }
+                    rangeArray.push(zrange);
+                    for (var i = 0; i < rangeArray.length; i++) {
+                        console.log("rangeArray[" + i + "]: " + rangeArray[i]);
+                    }
+                    return rangeArray;
+                }
+            }
+            
+            function removeChildNodesOfClassName(node, className) {
+                alert("calling removeChildNodesOfClassName");
+                var text;
+                var child;
+                var range;
+                var contents;
+                var children = node.childNodes;
+                for (var i = 0; i < children.length; i++) {
+                    child = children[i];
+                    if (child.hasChildNodes) {
+                        removeChildNodesOf(child, className);
+                    }
+                    if (child.className === className) {
+                        range = document.createRange();
+                        range.selectNodeContents(child);
+                        contents = range.cloneContents();
+                        range.setStartAfter(child);
+                        range.insertNode(contents);
+                        child.parentNode.removeChild(child);
+                    }
+                }
+            }
+            function removeChildNodesOf(node, property) {
+                alert("calling removeChildNodesOf");
+                var text;
+                var child;
+                var range;
+                var contents;
+                var children = node.childNodes;
+                for (var i = 0; i < children.length; i++) {
+                    child = children[i];
+                    if (child.hasChildNodes) {
+                        removeChildNodesOf(child, property);
+                    }
+                    if (child.nodeName === property) {
+                        /*
+                        range = document.createRange();
+                        range.selectNodeContents(child);
+                        contents = range.cloneContents();
+                        range.setStartAfter(child);
+                        //node.appendChild(contents);
+                        
+                        child.parentNode.removeChild(child);
+                        range.insertNode(contents);
+                        //node.appendChild(contents);
+                        */
+                        if (child.textContent == "") continue;
+                        range = document.createRange();
+                        range.selectNodeContents(child);
+                        contents = range.cloneContents();
+                        range.setStartAfter(child);
+                        range.insertNode(contents);
+                        child.parentNode.removeChild(child);
+                        
+                        
+                    }
+                }
+            }
+            
+            function findInnerDivs(node) {
+                alert("calling findInnerDivs");
+                var child;
+                var innerDivs = [];
+                if (node.nodeName == "DIV") {
+                    innerDivs.push(node);
+                }
+                if (!node.hasChildNodes()){
+                    return innerDivs;
+                }
+                var childDivs;
+                for (var i = 0; i < node.childNodes.length; i++) {
+                    child = node.childNodes[i];
+                    childDivs = findInnerDivs(child);
+                    for (var c = 0; c < childDivs.length; c++) {
+                        innerDivs.push(childDivs[c]);
+                    }
+                }
+                return innerDivs;
+            }
+            function findSelectionRanges(){
+                alert("calling findSelectionRanges");
+                //alert("find selection ranges");
+                var rangeArray = [];
+                var range;
+                var spans = document.getElementById("frame").contentWindow.document.getElementsByClassName("select-class");
+                for (var i = 0; i < spans.length; i++){
+                    range = document.createRange();
+                    range.selectNodeContents(spans[i]);
+                    //range.selectNode(spans[i]);
+                    rangeArray.push(range);
+                }
+                
+                return rangeArray;
+            }
+            function getHighestParentOf(anode, property) {
+                alert("calling getHighestParentOf");
+                var parent = null;
+                if (anode.nodeName == property) {
+                    parent = anode; //insurance
+                }
+                
+                if (anode.parentNode.nodeName === property) {
+                    if (hasParentOf(anode.parentNode, property)) {
+                        parent = getHighestParentOf(anode.parentNode, property);
+                    } else { //this is the highest parent of given property
+                        parent = anode.parentNode;
+                    }
+                } else if (isNodeNameSpecial(anode.parentNode)) {
+                    if (hasParentOf(anode.parentNode, property)) {
+                        parent = getHighestParentOf(anode.parentNode, property);
+                    }
+                }
+                
+                return parent;
+            }
+            
+            function isChildOf(node, parent) {
+                alert("calling isChildOf");
+                if (!parent.hasChildNodes) {
+                    return false;
+                }
+                var child;
+                var children = parent.childNodes;
+                for (var i = 0; i < children.length; i++) {
+                    child = children[i];
+                    if (child == node) {
+                        return true;
+                    } else if (isChildOf(node, child)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            function isParentOf(parent, node){
+                alert("calling isParentOf");
+                if (node.parentNode) { //if node has a parent
+                    if (parent == node.parentNode) { //if the parentNode is parent, done!
+                        return true;
+                    } else {
+                        return isParentOf(parent, node.parentNode);//check if parentNode has a parent that is equal to parent
+                    }
+                } else {
+                    return false;
+                }
+            }
+            function getHighestPropertyNode(node) {
+                alert("calling getHighestPropertyNode");
+                var highest = node;
+                
+                if (node.parentNode) {
+                    var parent = node.parentNode;
+                    if (isNodeNameSpecial(node.parentNode)) {
+                        node = getHighestPropertyNode(parent);
+                    }
+                }
+                
+                return node;
+            }
+            function selectText(contents, range){
+                alert("calling selectText");
+                var iDocument = document.getElementById("frame").contentWindow.document;
+                var hasSelection;
+                //hasSelection = (iDocument.getElementById("selection") != null); // if there is an element that is selected
+                hasSelection = (iDocument.getElementsByClassName("select-class").length != 0);
+                
+                if (hasSelection) {
+                    //removeSpanContents();
+                    //removeAllSpanElementContents();
+                } 
+                //clean contents
+                removeChildNodesOfClassName(contents, "select-class");
+                var start = document.createElement("span");
+                start.id = "selection";
+                start.className = "select-class";
+                //start.style.backgroundColor = highlight;
+                start.appendChild(contents);
+                /*
+                if (divided) {
+                    var div = findParentDiv(range.startContainer);
+                    if (div != null) {
+                        div.appendChild(start);
+                    } else {
+                        alert("something went wrong");
+                    }
+                } else {*/
+                    range.insertNode(start);
+               // }
+            }
+            function removeAllSpanElementContents(){
+                alert("calling removeAllSpanElementContents");
+                var iDocument = document.getElementById("frame").contentWindow.document;
+                var spans = iDocument.getElementsByClassName("select-class");
+                var span;
+                var range;
+                var contents;
+                for (var i = 0; i < spans.length; i++) {
+                    span = spans[i];
+                    range = iDocument.createRange();
+                    range.selectNodeContents(span);
+                    contents = range.extractContents();
+                    range.setStartBefore(span);
+                    range.insertNode(contents);
+                    span.parentNode.removeChild(span);
+                }
+            }
+            function removeSpanContents(){
+                alert("calling removeSpanContents");
+                var iDocument = document.getElementById("frame").contentWindow.document;
+                var span = iDocument.getElementById("selection");
+                var range = iDocument.createRange();
+                range.selectNodeContents(span);
+                var contents = range.extractContents();
+                range.setStartBefore(span);
+                range.insertNode(contents);
+                
+                var garbage = span.parentNode.removeChild(span);
+            }
+            function getFirstTextChild(node){
+                alert("calling getfirsttextchild");
+                var textNode = null;
+                
+                if (node.nodeName == "#text") {
+                    textNode = node;
+                } else {
+                    if (node.hasChildNodes()) {
+                        var child;
+                        var children = node.childNodes;
+                        for (var i = 0; i < children.length; i++) {
+                            child = children[i];
+                            if (textNode == null) {
+                                textNode = getFirstTextChild(child);
+                            }
+                            if (textNode != null) {
+                                break;
+                            }
+                        }
+                    }
+                }
+                return textNode;
+            }
+            
+            
+            function addSpaceToBreaks() {
+                alert("calling addSpaceToBreaks");
+                var gaps = document.getElementById("frame").contentWindow.document.getElementsByTagName("br");
+                for (var i = 0; i < gaps.length; i++) {
+                    var textNode = document.createTextNode(" ");
+                    gaps[i].parentNode.appendChild(textNode);
+                }
+            }
+            function findParentOf(node, name) {
+                alert("calling findParentOf");
+                if (node.nodeName === name) {
+                    return node;
+                }
+                if (node.parentNode) {
+                    return findParentOf(node.parentNode, name);
+                }
+                return null;
+            }
+            function findParentDiv(node) {
+                alert("calling findParentDiv");
+                if (node.nodeName == "DIV") {
+                    return node;
+                }
+                if (node.parentNode) {
+                    return findParentDiv(node.parentNode);
+                }
+                return null;
+            }
+            function findParentH(name, node) {
+                alert("calling findParentH");
+                if (node.nodeName === name) {
+                    return node;
+                }
+                if (node.parentNode) {
+                    return findParentH(name, node.parentNode);
+                }
+                return null;
+            }
+            
+            function addA(){
+                
+            }
+            function removeList(node){
+                alert("calling removeList");
+                var range = document.createRange();
+                range.selectNode(node);
+                var listItems = document.getElementById("frame")
+                .contentWindow.document.getElementById("content")
+                .getElementsByTagName("li");
+                for (var i = 0; i < listItems.length; i++) {
+                    alert("list item text: " + listItems[i].textContent);
+                }
+            }
+            function addList(ordered) {
+                alert("calling addList");
+                var tag = ordered ? "ol" : "ul";
+                var list = document.createElement(tag);
+                var item = document.createElement("li");
+                list.appendChild(item);
+                
+                var selection = document.getElementById("frame").contentWindow.getSelection();
+                var range = selection.getRangeAt(0);
+                var anode = range.startContainer;
+                
+                var div;
+                if (hasParentOf(anode, tag)){
+                    removeList(findParentOf(anode, tag));
+                    return;
+                }
+                if (hasParentOf(anode, "LI")) {
+                    div = findParentOf(anode, "UL");
+                    if (div == null) {
+                        div = findParentOf(anode, "OL");
+                    }
+                } else {
+                    div = findParentDiv(anode);
+                }
+                range.selectNodeContents(div);
+                var contents = range.extractContents();
+                range.setStartBefore(div);
+                item.appendChild(contents);
+                range.insertNode(list);
+                div.parentNode.removeChild(div);
+            }
+            function addBlockquote(){
+                alert("calling addblockquote");
+                var quote = document.createElement("BLOCKQUOTE");
+                var selection = document.getElementById("frame").contentWindow.getSelection();
+                var range = selection.getRangeAt(0);
+                var anode = range.startContainer;
+                var div = findParentDiv(anode);
+                range.selectNodeContents(div);
+                var contents = range.extractContents();
+                range.setStartBefore(div);
+                quote.appendChild(contents);
+                range.insertNode(quote);
+                div.parentNode.removeChild(div);
+            }
+            
+            function changeWriterTest(type){
+                alert("calling changeWriterTest");
+                var writeNode;
+                switch (type) {
+                    case "header":
+                        writeNode = document.createElement("H3");
+                        writeNode.appendChild(document.createTextNode(""));
+                        break;
+                    case "normal":
+                        writeNode = document.createTextNode("");
+                        break;
+                    default:
+                        writeNode = document.createTextNode("");
+                }
+                var iframe = document.getElementById("frame");
+                var iWindow = iframe.contentWindow;
+                var iDocument = iWindow.document;
+                var focus = iDocument.getElementById("content");
+                
+                //focus.appendChild(writeNode);
+                var selection = document.getElementById("frame").contentWindow.getSelection();
+                var range = selection.getRangeAt(0);
+                //var anode = range.startContainer;
+                //range.setStart(anode, range.startOffset);
+                var contents = range.extractContents();
+                range.insertNode(writeNode);
+                focus.focus();
+            }
+
+            function changeWriterold(type){
+                alert("calling changeWriterOld");
+                var writeNode;
+                var selection = document.getElementById("frame").contentWindow.getSelection();
+                var range = selection.getRangeAt(0);
+                var anode = range.startContainer;
+                var div = findParentDiv(anode);
+                switch (type) {
+                    case "header":
+                        writeNode = document.createElement("H3");
+                        if (hasParentOf(anode, "H3")) {
+                            alert("this is already a heading");
+                            return;
+                        }
+                        div = findParentDiv(anode);
+                        //toHeader(writeNode);
+                        break;
+                    case "normal":
+                        writeNode = document.createElement("DIV");
+                        div = findParentH("H3", anode);
+                        if (div == null) {
+                            alert("selection is already normal");
+                            return;
+                        }
+                        //toNormal(writeNode);
+                        break;
+                    default:
+                        writeNode = document.createTextNode("DIV");
+                }
+                range.selectNodeContents(div);
+                var contents = range.extractContents();
+                range.setStartBefore(div);
+                writeNode.appendChild(contents);
+                range.insertNode(writeNode);
+                div.parentNode.removeChild(div);
+                focus();
+            }
+            
+        </script>
+    </body>
+</html>

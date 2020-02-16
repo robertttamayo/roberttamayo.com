@@ -1,7 +1,6 @@
 $(document).ready(function(){
     if ($('body').hasClass('page-index')) {
         Clouds.run();
-        $('.cloud').addClass('running');
     }
     
     if ($('body').hasClass('page-about')) {
@@ -19,7 +18,6 @@ var Clouds = (function(Clouds, $) {
     var collisions = 0;
     return {
         run: function() {
-            console.log('run');
             for (var i = 0; i < 10; i++) {
                 var top = Math.floor(Math.random() * 200);
                 var right = Math.floor(Math.random() * $(window).width());
@@ -39,7 +37,6 @@ var Clouds = (function(Clouds, $) {
                 }
                 if (collision) {
                     collisions++;
-                    console.log('collision!');
                     continue;
                 }
                 _clouds.push({top: top, right: right});
@@ -53,8 +50,12 @@ var Clouds = (function(Clouds, $) {
                 div.css('transform', 'translate(-' + right + 'px, 0');
                 div.appendTo($('body'));
             }
-            console.log('collisions: ' + collisions);
             var _cloudElems = $('.cloud');
+            
+            if ($(window).width() > 768) { 
+                checkClouds();
+            }
+            
             var cloudChecker = window.setInterval(checkClouds, 500);
             function checkClouds() {
                 _cloudElems.addClass('running');
@@ -87,9 +88,6 @@ function Rectangle(width, height, top, right){
     }
     
     this.contains = function(top, right) {
-        console.log(_self);
-        console.log('top: ' + top);
-        console.log('right: ' + right);
         return ( (_self.right < right && _self.right + _self.width > right) &&
                 (_self.top + _self.height > top && _self.top < top) );
     }
@@ -116,10 +114,7 @@ var StarBackground = (function(StarBackground){
                     twinkle: (Math.random() > .75) ? 'twinkle' : '',
                     delay: Math.floor((Math.random() * 10)) / 10 + 's'
                 }
-                if (i == 1) console.log(data);
-                if (i == 1) console.log(template);
                 var html = Template.process(template, data);
-                if (i == 1) console.log(html);
                 $('body').append(html);
             }
         }

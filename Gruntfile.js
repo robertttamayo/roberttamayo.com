@@ -24,7 +24,8 @@ module.exports = function(grunt) {
                     style: 'expanded'
                 },
                 files: {
-                    'assets/css/core.css': 'assets/sass/core.scss'
+                    'assets/css/core.css': 'assets/sass/core.scss',
+                    'assets/css/blog.css': 'assets/sass/blog.scss'
                 }
             }
         },
@@ -36,7 +37,8 @@ module.exports = function(grunt) {
                     banner: 'RedCodeBlueCode'
                 },
                 files: {
-                    'assets/css/min/core.min.css': ['assets/css/*.css'],
+                    'assets/css/min/core.min.css': ['assets/css/core.css'],
+                    'assets/css/min/blog.min.css': ['assets/css/blog.css'],
                 }
             }
         },
