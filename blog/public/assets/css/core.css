@@ -137,7 +137,7 @@ button.btn-ii, .btn-ii {
 
 /* All NEW STUFF */
 body {
-  font-family: "Droid Sans", sans-serif;
+  font-family: "Fira Sans", sans-serif;
   background: #333;
 }
 
@@ -201,9 +201,9 @@ header {
 }
 
 .page-title {
-  color: #565656;
+  color: #cecece;
   font-size: 20px;
-  font-family: "Droid Sans", sans-serif;
+  font-family: "Fira Sans", sans-serif;
   width: 100%;
   height: 100%;
   background: #333;
@@ -228,10 +228,10 @@ header {
 }
 .page-title h1 {
   margin: 0;
-  margin-top: 30px;
-  font-size: 70px;
+  font-size: 14vw;
   text-align: center;
-  z-index: 1;
+  z-index: 0;
+  opacity: 10%;
   width: 100%;
 }
 @media (max-width: 768px) {
@@ -242,7 +242,7 @@ header {
 }
 @media (max-width: 540px) {
   .page-title h1 {
-    font-size: 18vw;
+    font-size: 27vw;
     line-height: 24vw;
   }
 }
@@ -288,7 +288,7 @@ header {
 }
 
 .blogfeed-title {
-  font-family: "Droid Sans", sans-serif;
+  font-family: "Fira Sans", sans-serif;
   text-align: right;
   padding: 60px;
   padding-right: 20px;
@@ -349,7 +349,7 @@ header {
 }
 
 .blogfeed-item:nth-child(4n + 0) .blogfeed-text-preview {
-  background: lighen(#c88584, 20%);
+  background: #e0b9b9;
 }
 
 .blogfeed-item:nth-child(4n + 1) .blogfeed-title {
@@ -357,7 +357,7 @@ header {
 }
 
 .blogfeed-item:nth-child(4n + 1) .blogfeed-text-preview {
-  background: lighen(#de7c62, 20%);
+  background: #ebb1a1;
 }
 
 .blogfeed-item:nth-child(4n + 2) .blogfeed-title {
@@ -365,7 +365,7 @@ header {
 }
 
 .blogfeed-item:nth-child(4n + 2) .blogfeed-text-preview {
-  background: lighen(#84a5c8, 20%);
+  background: #b9cce0;
 }
 
 .blogfeed-item:nth-child(4n + 3) .blogfeed-title {
@@ -373,7 +373,7 @@ header {
 }
 
 .blogfeed-item:nth-child(4n + 3) .blogfeed-text-preview {
-  background: lighen(#58bdcb, 20%);
+  background: #92d4dd;
 }
 
 pre {
@@ -414,14 +414,14 @@ pre {
 
 .blog-h1 {
   padding: 0;
-  font-family: "Droid Sans", sans-serif;
+  font-family: "Fira Sans", sans-serif;
   font-weight: bold;
   max-width: 800px;
   margin: auto;
 }
 
 .blog-h1 h1 {
-  font-family: "Droid Sans", sans-serif;
+  font-family: "Fira Sans", sans-serif;
   font-weight: bold;
   margin: 0;
   padding: 0;
@@ -429,7 +429,7 @@ pre {
 }
 
 .blog-post-meta {
-  font-family: "Droid Sans", sans-serif;
+  font-family: "Fira Sans", sans-serif;
   color: #333;
   margin-bottom: 10px;
 }

@@ -40,12 +40,12 @@
             </div> -->
 
             <div class="page-title">
-                <h1>Blog</h1>
+                <h1>Robert Tamayo</h1>
             </div>
             
-            <div class="blog-skull-image-desktop">
+            <!-- <div class="blog-skull-image-desktop">
                 <img src="/assets/images/skull2.png" alt="skull">
-            </div>
+            </div> -->
         </header>
         <div class="main">
             <div class="main-left"></div>

@@ -45,7 +45,7 @@ header {
     }
 }
 .page-title {
-    color: $rbgray;
+    color: $rbwhite;
     font-size: 20px;
     font-family: $sans;
     width: 100%;
@@ -61,17 +61,18 @@ header {
     @include flex-direction(column);
     h1 {
         margin: 0;
-        margin-top: 30px;
-        font-size: 70px;
+        font-size: 14vw;
         text-align: center;
-        z-index: 1;
+        z-index: 0;
+        opacity: 10%;
         width: 100%;
+    
         @media (max-width: $screen-sm-max) {
             font-size: 20vw;
             line-height: 16vw;
         }
         @media (max-width: $screen-xs-max) {
-            font-size: 18vw;
+            font-size: 27vw;
             line-height: 24vw;
         }
     }
@@ -159,28 +160,28 @@ header {
     background: $rbred;
   }
   .blogfeed-item:nth-child(4n + 0) .blogfeed-text-preview {
-    background: lighen($rbred, 20%);
+    background: lighten($rbred, 15%);
   }
   
   .blogfeed-item:nth-child(4n + 1) .blogfeed-title {
     background: $rborange;
   }
   .blogfeed-item:nth-child(4n + 1) .blogfeed-text-preview {
-    background: lighen($rborange, 20%);
+    background: lighten($rborange, 15%);
   }
   
   .blogfeed-item:nth-child(4n + 2) .blogfeed-title {
     background: $rbblue;
   }
   .blogfeed-item:nth-child(4n + 2) .blogfeed-text-preview {
-    background: lighen($rbblue, 20%);
+    background: lighten($rbblue, 15%);
   }
   
   .blogfeed-item:nth-child(4n + 3) .blogfeed-title {
     background: $rbteal;
   }
   .blogfeed-item:nth-child(4n + 3) .blogfeed-text-preview {
-    background: lighen($rbteal, 20%);
+    background: lighten($rbteal, 15%);
   }
 
 pre {
