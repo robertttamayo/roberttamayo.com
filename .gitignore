@@ -3,4 +3,4 @@
 /blog/vendor/
 /blog/node_modules/
 /blog/.sass-cache*
-*sass-cache*
+.sass-cache*

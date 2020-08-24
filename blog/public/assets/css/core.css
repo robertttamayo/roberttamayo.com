@@ -138,7 +138,7 @@ button.btn-ii, .btn-ii {
 /* All NEW STUFF */
 body {
   font-family: "Droid Sans", sans-serif;
-  background: black;
+  background: #333;
 }
 
 header {
@@ -201,11 +201,12 @@ header {
 }
 
 .page-title {
-  color: #ff7a00;
+  color: #565656;
   font-size: 20px;
-  font-family: "Bowlby One SC", sans-serif;
+  font-family: "Droid Sans", sans-serif;
   width: 100%;
   height: 100%;
+  background: #333;
   z-index: 1;
   display: -webkit-box;
   display: -moz-box;
@@ -262,10 +263,8 @@ header {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  background: #e3dac9;
-  max-width: 800px;
+  background: #c88584;
   margin: auto;
-  margin-bottom: 30px;
 }
 @media (max-width: 768px) {
   .blogfeed-item {
@@ -289,20 +288,20 @@ header {
 }
 
 .blogfeed-title {
-  font-family: "Bowlby One SC", sans-serif;
+  font-family: "Droid Sans", sans-serif;
   text-align: right;
   padding: 60px;
   padding-right: 20px;
-  padding-left: calc(50% - 380px);
+  padding-left: calc(50% - 400px);
   font-size: 24px;
   width: 50%;
 }
 .blogfeed-title a {
   text-decoration: none;
-  color: black;
+  color: #333;
 }
 .blogfeed-title .blogfeed-publishdate {
-  color: black;
+  color: #333;
   font-size: 14px;
   margin-top: 5px;
 }
@@ -312,8 +311,8 @@ header {
   width: 50%;
   padding: 60px;
   padding-left: 20px;
-  padding-right: calc(50% - 380px);
-  color: black;
+  padding-right: calc(50% - 400px);
+  color: #333;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -331,18 +330,50 @@ header {
 }
 
 .read-more-link {
-  color: black;
+  color: #333;
   text-decoration: none;
 }
 
 .blogfeed-item {
-  background: #e3dac9;
+  background: #84a5c8;
 }
 .blogfeed-item .blogfeed-title {
   background: transparent;
 }
 .blogfeed-item .blogfeed-text-preview {
   background: transparent;
+}
+
+.blogfeed-item:nth-child(4n + 0) .blogfeed-title {
+  background: #c88584;
+}
+
+.blogfeed-item:nth-child(4n + 0) .blogfeed-text-preview {
+  background: lighen(#c88584, 20%);
+}
+
+.blogfeed-item:nth-child(4n + 1) .blogfeed-title {
+  background: #de7c62;
+}
+
+.blogfeed-item:nth-child(4n + 1) .blogfeed-text-preview {
+  background: lighen(#de7c62, 20%);
+}
+
+.blogfeed-item:nth-child(4n + 2) .blogfeed-title {
+  background: #84a5c8;
+}
+
+.blogfeed-item:nth-child(4n + 2) .blogfeed-text-preview {
+  background: lighen(#84a5c8, 20%);
+}
+
+.blogfeed-item:nth-child(4n + 3) .blogfeed-title {
+  background: #58bdcb;
+}
+
+.blogfeed-item:nth-child(4n + 3) .blogfeed-text-preview {
+  background: lighen(#58bdcb, 20%);
 }
 
 pre {
@@ -367,38 +398,30 @@ pre {
   margin-left: auto;
   margin-right: auto;
   max-width: 800px;
-  color: black;
 }
 .blog-h1-wrap[data-style="0"] {
   background: #de7c62;
-  background: #e3dac9;
 }
 .blog-h1-wrap[data-style="1"] {
   background: #84a5c8;
-  background: #e3dac9;
 }
 .blog-h1-wrap[data-style="2"] {
   background: #58bdcb;
-  background: #e3dac9;
 }
 .blog-h1-wrap[data-style="3"] {
   background: #c88584;
-  background: #e3dac9;
-}
-.blog-h1-wrap[data-style="*"] {
-  background: #e3dac9;
 }
 
 .blog-h1 {
   padding: 0;
-  font-family: "Bowlby One SC", sans-serif;
+  font-family: "Droid Sans", sans-serif;
   font-weight: bold;
   max-width: 800px;
   margin: auto;
 }
 
 .blog-h1 h1 {
-  font-family: "Bowlby One SC", sans-serif;
+  font-family: "Droid Sans", sans-serif;
   font-weight: bold;
   margin: 0;
   padding: 0;
@@ -406,8 +429,8 @@ pre {
 }
 
 .blog-post-meta {
-  font-family: "Bowlby One SC", sans-serif;
-  color: black;
+  font-family: "Droid Sans", sans-serif;
+  color: #333;
   margin-bottom: 10px;
 }
 
@@ -511,8 +534,8 @@ body.code-light-theme .formatted .tags {
 
 .blog-post-wrapper {
   padding: 20px;
-  background: #e3dac9;
-  color: black;
+  background: #cecece;
+  color: #333;
   width: calc(100% - 40px);
   margin: 20px;
   margin-left: auto;
@@ -521,7 +544,7 @@ body.code-light-theme .formatted .tags {
 }
 
 .blog-post {
-  color: black;
+  color: #333;
   max-width: 800px;
   margin: auto;
 }
@@ -533,7 +556,7 @@ body.code-light-theme .formatted .tags {
   margin-right: auto;
   max-width: 800px;
   width: calc(100% - 40px);
-  background: #e3dac9;
+  background: #565656;
 }
 
 .blog-comment-section-top {
@@ -729,16 +752,16 @@ body.not-signed-in .sign-in-form {
   transform: translate(-50%, -50%);
 }
 .blog-comment[data-comment-style-index="1"] .blog-comment-color {
-  color: #0085ff;
+  color: #84a5c8;
 }
 .blog-comment[data-comment-style-index="2"] .blog-comment-color {
-  color: #ff7a00;
+  color: #de7c62;
 }
 .blog-comment[data-comment-style-index="3"] .blog-comment-color {
-  color: #00ff7a;
+  color: #58bdcb;
 }
 .blog-comment[data-comment-style-index="4"] .blog-comment-color {
-  color: #ff0085;
+  color: #c88584;
 }
 
 /*# sourceMappingURL=core.css.map */

@@ -35,9 +35,9 @@
     <body>
         
         <header>
-            <div class="blog-skull-image">
+            <!-- <div class="blog-skull-image">
                 <img src="/assets/images/skull4.png" alt="skull">
-            </div>
+            </div> -->
 
             <div class="page-title">
                 <h1>Blog</h1>

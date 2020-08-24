@@ -1,6 +1,6 @@
 body {
     font-family: $sans;
-    background: black;
+    background: $rbdarkgray;
 }
 header {
     @include flex();
@@ -47,7 +47,7 @@ header {
 .page-title {
     color: $rbgray;
     font-size: 20px;
-    font-family: $font-skull;
+    font-family: $sans;
     width: 100%;
     height: 100%;
     background: $rbdarkgray;
@@ -87,10 +87,8 @@ header {
 
 .blogfeed-item {
     @include flex();
-    background: $skull-white;
-    max-width: 800px;
+    background: $rbred;
     margin: auto;
-    margin-bottom: 30px;
     
     @media (max-width: $screen-sm-max) {
         @include flex-direction(column);
@@ -111,19 +109,19 @@ header {
     }
 }
 .blogfeed-title {
-    font-family: $font-skull;
+    font-family: $sans;
     text-align: right;
     padding: 60px;
     padding-right: 20px;
-    padding-left: calc(50% - 380px);
+    padding-left: calc(50% - 400px);
     font-size: 24px;
     width: 50%;
     a {
         text-decoration: none;
-        color: black;
+        color: $rbdarkgray;
     }
     .blogfeed-publishdate {
-        color: black;
+        color: $rbdarkgray;
         font-size: 14px;
         margin-top: 5px;
     }
@@ -133,8 +131,8 @@ header {
     width: 50%;
     padding: 60px;
     padding-left: 20px;
-    padding-right: calc(50% - 380px);
-    color: black;
+    padding-right: calc(50% - 400px);
+    color: $rbdarkgray;
     @include flex();
     @include flex-direction(column);
     @include justify-content(space-between);
@@ -144,12 +142,12 @@ header {
     }
 }
 .read-more-link {
-    color: black;
+    color: $rbdarkgray;
     text-decoration: none;
 }
 
 .blogfeed-item {
-    background: $skull-white;
+    background: $rbblue;
     .blogfeed-title {
         background: transparent;
     }
@@ -157,6 +155,33 @@ header {
         background: transparent;
     }
 }
+.blogfeed-item:nth-child(4n + 0) .blogfeed-title {
+    background: $rbred;
+  }
+  .blogfeed-item:nth-child(4n + 0) .blogfeed-text-preview {
+    background: lighen($rbred, 20%);
+  }
+  
+  .blogfeed-item:nth-child(4n + 1) .blogfeed-title {
+    background: $rborange;
+  }
+  .blogfeed-item:nth-child(4n + 1) .blogfeed-text-preview {
+    background: lighen($rborange, 20%);
+  }
+  
+  .blogfeed-item:nth-child(4n + 2) .blogfeed-title {
+    background: $rbblue;
+  }
+  .blogfeed-item:nth-child(4n + 2) .blogfeed-text-preview {
+    background: lighen($rbblue, 20%);
+  }
+  
+  .blogfeed-item:nth-child(4n + 3) .blogfeed-title {
+    background: $rbteal;
+  }
+  .blogfeed-item:nth-child(4n + 3) .blogfeed-text-preview {
+    background: lighen($rbteal, 20%);
+  }
 
 pre {
     width: calc(100% - 40px);
@@ -194,21 +219,21 @@ pre {
 }
 .blog-h1 {
     padding: 0;
-    font-family: $font-skull;
+    font-family: $sans;
     font-weight: bold;
     max-width: 800px;
     margin: auto;
 }
 .blog-h1 h1 {
-    font-family: $font-skull;
+    font-family: $sans;
     font-weight: bold;
     margin:0;
     padding:0;
     font-size: 30px;
 }
 .blog-post-meta {
-    font-family: $font-skull;
-    color: black;
+    font-family: $sans;
+    color: $rbdarkgray;
     margin-bottom: 10px;
 }
 body {
