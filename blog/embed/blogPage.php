@@ -24,7 +24,7 @@ for ($i = 0; $i < $size; $i++) {
     $blog = $blog_data[$i];
     ?>
 
-    <div class="blog-post-wrapper">
+    <div class="blog-post-wrapper" data-style="<?= $post_style ?>">
         <div class="blog-post">
             <?= $blog['content'] ?>
         </div>

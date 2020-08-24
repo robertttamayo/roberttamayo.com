@@ -42,6 +42,16 @@
             <div class="page-title">
                 <h1>Robert Tamayo</h1>
             </div>
+
+            <a class="redcodebluecode" href="http://www.roberttamayo.com/" title="Robert Tamayo home page">
+                <div>
+                    <div class="redblue">
+                        <div class="red">R</div>
+                        <div class="blue">B</div>
+                    </div>
+                    <div class="code">code</div>
+                </div>
+            </a>
             
             <!-- <div class="blog-skull-image-desktop">
                 <img src="/assets/images/skull2.png" alt="skull">

@@ -14,18 +14,55 @@
 
 .blog-post-wrapper {
     padding: 20px;
-    background: $rbwhite;
+    background: $rbdarkgray;
     color: $rbdarkgray;
-    width: calc(100% - 40px);
-    margin: 20px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 800px;
 }
 .blog-post {
-    color: $rbdarkgray;
+    color: $rblightgray;
     max-width: 800px;
     margin: auto;
+}
+.blog-post-wrapper {
+    h1, h2, h3, h4, h5, h6 {
+        color: $rbdarkgray;
+        padding: 20px;
+        text-align: center;
+        display: block;
+    }
+    &[data-style="0"] {
+        h1, h2, h3, h4, h5, h6 {
+            background: $rborange;
+        }
+        a {
+            color: $rborange;
+        } 
+    }
+    &[data-style="1"] {
+        h1, h2, h3, h4, h5, h6 {
+            background: $rbblue;
+        }
+        a {
+            color: $rbblue;
+        }
+    }
+    &[data-style="2"] {
+        h1, h2, h3, h4, h5, h6 {
+            background: $rbteal;
+        }
+        a {       
+            color: $rbteal;
+        }
+    }
+    &[data-style="3"] {
+        h1, h2, h3, h4, h5, h6 {
+            background: $rbred;
+        }
+        a {        
+            color: $rbred;
+        }
+    }
 }
 /* blog comments */
 .blog-comment-section {
@@ -42,8 +79,9 @@
     @include align-items(center);
     padding: 20px;
     .blog-comment-title {
-        font-size: 20px;
-        font-family: $font-skull;
+        font-size: 30px;
+        font-family: $sans;
+        font-weight: bold;
     }
 }
 .blog-comment-likes {
@@ -63,7 +101,7 @@
     .hide-replies {
         padding-bottom: 0;
         cursor: pointer;
-        color: black;
+        color: $rbwhite;
         font-weight: bold;
     }
     &[data-replies-visible="true"] {
