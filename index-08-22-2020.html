@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Robert Tamayo</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Arbutus&family=Barriecito&family=Bowlby+One+SC&family=Flavors&family=Frijole&family=Rowdies:wght@700&family=Slackey&display=swap" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+        <link rel="icon"  type="image/png" href="/assets/icon/favicon.ico">
+    </head>
+    <body>
+        <style>
+            body {
+                background: black;
+                margin: 0;
+                padding: 0;
+            }
+            body * {
+                box-sizing: border-box;
+            }
+            h1 {
+                font-size: 70px;
+                font-family: 'Bowlby One SC', cursive;
+                letter-spacing: 5px;
+
+                color: #ff7a00;
+                margin-bottom: 0;
+                text-align: center;
+            }
+            .main-container {
+                max-width: 960px;
+                margin: auto;
+            }
+            .image-section {
+                width: 50%;
+                height: auto;
+                margin: auto;
+            }
+            .image-section img {
+                width: 100%;
+                height: auto;
+            }
+            .menu-section {
+                width: 50%;
+                margin: auto;
+            }
+            .menu-section ul {
+                padding: 0;
+                list-style: none;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
+            }
+            .menu-section li {
+                padding: 0 30px;
+                font-size: 30px;
+            }
+            .menu-section a {
+                color: #ff7a00;
+                font-weight: bold;
+                text-decoration: none;
+                font-family: sans-serif;
+                font-family: 'Bowlby One SC', cursive;
+                letter-spacing: 5px;
+            }
+            .menu-section a:hover {
+                color: #ff0085;
+                text-decoration: underline;
+            } 
+            .menu-section a:active {
+                color: #7a00ff;
+                text-decoration: underline;
+            }
+            /*
+	    .menu-section a:visited {
+                color: #0085ff;
+                color: #cc6200;
+            }
+            */
+            @media (max-width: 960px) {
+                .menu-section li {
+                    padding: 0 50px;
+                    font-size: 50px;
+                }
+            }
+            @media (max-width: 767px) {
+                .menu-section li {
+                    padding: 10px 0;
+                    font-size: 30px;
+                }
+                .menu-section ul {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .image-section {
+                    width: 60%;
+                }
+                h1 {
+                    margin-bottom: 20px;
+                    font-size: 50px;
+                }
+            }
+        </style>
+        <div class="main-container">
+            <div class="header-section">
+                <h1>Robert Tamayo</h1>
+            </div>
+            <div class="image-section">
+                <img src="/assets/images/skull2.png">
+            </div>
+            <div class="menu-section">
+                <ul>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about.php">About</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="/blog/public/assets/js/module/Stats.js"></script>
+    </body>
+</html>

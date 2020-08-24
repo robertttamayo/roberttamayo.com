@@ -1,0 +1,40 @@
+.img-editor-wrap {
+    position: relative;
+    width: 60%;
+    img {
+        width: 100%;
+    }
+}
+.img-editor-bar {
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    display: none;
+    padding: 8px;
+    
+    .img-editor-group {
+        margin-right: 16px;
+        &:last-child {
+            margin-right: 0px;
+        }
+    }
+    
+    .btn {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        margin: 0 2px;
+        font-size: 16px;
+        
+        &.img-small {
+            i {
+                transform: scale(.65);
+            }
+        }
+        &.img-large {
+            i {
+                transform: scale(1.35);
+            }
+        }
+    }
+}

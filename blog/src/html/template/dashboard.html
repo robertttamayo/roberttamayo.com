@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <title><?= $bb->title() ?></title>
+    
+    <!-- CSS -->
+    <?= $bb->headStyles() ?>
+    
+    <!-- JS -->
+    <?= $bb->headScripts() ?>
+    
+</head>
+    
+<body class="">
+    <div class="loading"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+    <div class="dim"></div>
+    <div id="message" class="message-box">
+        <div id="message-close" class="close-x">
+            <i class="fa fa-1 fa-times" aria-hidden="true"></i>
+        </div>
+        <div id="message-message">
+        </div>
+    </div>
+    <div class="big-wrap flex flex-vert">
+        <div class="top-wrap container flex flex-hor">
+            <div class="logo home-button btn font-size-medium" aria-title="Bob Blog 2" title="Bob Blog 2">
+                <div class="bb"><span class="color-a">Bob</span><br><span class="color-b">Blog</span></div><span class="ii color-c"><sup>2</sup></span>
+            </div>
+            <div class="nav-tools-wrap flex flex-hor">
+                <div class="site-name font-size-x-large"><?= SITE_NAME ; ?></div>
+                <div class="user-tools-quick flex flex-hor">
+                    <div><i class="fa fa-user-circle" aria-hidden="true"></i> Account (<?= $bb->getUserProfile()->getName();?>)</div>
+                    <div>|</div>
+                    <div><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-wrap flex flex-hor">
+            <div class="left-rail-wrap">
+                <div class="left-rail container flex flex-vert">
+<!--
+                    <div class="welcome font-size-medium">
+                        Hi, <?= $bb->getUserProfile()->getName(); ?>
+                    </div>
+-->
+                    <div class="btn new-post">
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+<!--                        <i class="fa-small fa fa-plus" aria-hidden="true"></i>-->
+                    </div>
+                    <div class="btn">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="btn">
+                        <i class="fa fa-file-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="btn">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                    <div class="btn">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    </div>
+                    
+<!--
+                    <div class="option-wrap font-size-small" data-status="posts">
+                        Posts <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="option-wrap font-size-small" data-status="media">
+                        Media <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="option-wrap font-size-small" data-status="pages">
+                        Pages <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="option-wrap font-size-small" data-status="users">
+                        Users <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="option-wrap font-size-small" data-status="logout">
+                        Log out <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </div>
+-->
+                </div>
+            </div>
+            <div class="main">
+<!--
+                <div class="common-actions flex flex-hor">
+                    <button class="btn new-post">New Post</button>
+                    <button class="btn manage-media">Media</button>
+                    <button class="btn new-post">Also New Post</button>
+                    <button class="btn new-post">Also New Post</button>
+                </div>
+-->
+
+                <div class="main-container-wrap">
+                    <div id="main-container">
+                        <?php include(SRC_DIR . 'welcome.php') ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+    
+</html>

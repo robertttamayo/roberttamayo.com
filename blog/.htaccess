@@ -1,0 +1,14 @@
+#PHP code in HTML file
+AddType fcgid-script .php .htm .html .phtml
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /blog/
+    # RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . "" [L]
+    #get rid of .php
+    RewriteRule ^index\.php$ "" [R=301,L]
+    RewriteRule ^(.*)index\.php$ /blog/$1/ [R=301,L]
+</IfModule>

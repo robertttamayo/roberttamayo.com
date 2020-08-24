@@ -1,0 +1,194 @@
+<div class="editor-wrap">
+    <div class="post-title-wrap container flex flex-hor">
+        <div class="post-title-label c-blue">Title</div>
+        <div class="post-title flex flex-hor">
+            <input name="post-title" class="change-watch" type="text" id="post-title" placeholder="Post Title" value="<?php if ($posttitle != "") {echo $posttitle;} ?>">
+            <div class="label save-post change-reset"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Save &amp; Publish</div>
+        </div>
+    </div>
+    
+    <div class="post-title-wrap container flex flex-hor">
+        <div class="post-title-label c-blue">Url</div>
+        <div class="post-title disabled post-permalink flex flex-hor">
+            <input name="post-permalink-input" type="text" id="post-permalink-input" value="<?= $permalink ?>" class="change-watch">
+            <div class="label permalink-change"><i class="fa fa-link" aria-hidden="true"></i> <span class="unlock">Change url</span><span class="lock">Save changes</span></div>
+        </div>
+    </div>
+    
+    <div class="feature-image-title">Featured Image</div>
+    
+    <div class="post-title-wrap container flex flex-hor feature-image-tool">
+        <div class="featured-image">
+            <?php if ($featured_image != '') { ?>
+            <img src="<?= $featured_image ?>">
+            <?php } else { ?>
+            <div class="add-featured-image-button">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add a featured image
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+    
+    <div class="post-meta">
+        <div class="post-meta-wrapper flex flex-hor">
+            <div class="btn inline manage-cats change-watch">
+                <i class="fa fa-tag" aria-hidden="true"></i>
+                Categories
+            </div>
+            <div class="btn inline manage-tags change-watch">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                Tags
+            </div>
+        </div>
+    </div>
+    <div class="post-submit-options flex flex-hor">
+        <button class="save-post draft-option published-option change-reset"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Save &amp; Update</button>
+        <button class="draft-post draft-option change-reset"><i class="fa fa-wrench" aria-hidden="true"></i> Save Draft</button>
+        <button class="copy-post published-option draft-option"><i class="fa fa-files-o" aria-hidden="true"></i> Copy to New Draft</button>
+        <button class="unpublish-post published-option change-reset"><i class="fa fa-user-secret" aria-hidden="true"></i> Unpublish</button>
+        <button class="schedule-post draft-option"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule Publish</button>
+        <button class="post-preview published-option draft-option"><i class="fa fa-binoculars" aria-hidden="true"></i> Preview</button>
+    </div>
+    <div class="edit-container container flex flex-hor">
+        <div class="edit-container-bottom"></div>
+        <div class="edit-item i flex flex-hor">
+            <a style="display: none" id="writer-type">Normal</a>
+            <button class="drop-button btn-ii" id="header"><i class="fa fa-header" aria-hidden="true"></i></button>
+            <button class="drop-button btn-ii" id="normal"><i class="fa fa-font" aria-hidden="true"></i></button>
+        </div>
+        <div class="edit-item ii flex flex-hor">
+            <button id="undo" class="btn-ii" type="button" style="font-size: large;"><i class="fa fa-undo" aria-hidden="true"></i></button>
+            <button id="redo" class="btn-ii" type="button" style="font-size: large"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+        </div>
+        <div class="edit-item i flex flex-hor">
+            <button id="italic" class="btn-ii" type="button"><i class="fa fa-italic" aria-hidden="true"></i></button>
+            <button id="bold" class="btn-ii" type="button"><i class="fa fa-bold" aria-hidden="true"></i></button>
+            <button id="underline" class="btn-ii" type="button"><i class="fa fa-underline" aria-hidden="true"></i></button>
+            <button id="strike" class="btn-ii" type="button"><i class="fa fa-strikethrough" aria-hidden="true"></i></button>
+        </div>
+        <div class="edit-item ii flex flex-hor">
+            <button class="btn-ii drop-button" id="left"><i class="fa fa-align-left" aria-hidden="true"></i></button>
+            <button class="btn-ii drop-button" id="center" ><i class="fa fa-align-center" aria-hidden="true"></i></button>
+            <button class="btn-ii drop-button" id="right"><i class="fa fa-align-right" aria-hidden="true"></i></button>
+            <button class="btn-ii drop-button" id="justify" ><i class="fa fa-align-justify" aria-hidden="true"></i></button>
+        </div>
+        <div class="edit-item i flex flex-hor">
+            <button class="btn-ii" id="show-colors-modal" class="show-color-picker"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
+        </div>
+
+        <div class="edit-item ii flex flex-hor">
+            <button id="ol" class="btn-ii drop-button" type="button" ><i class="fa fa-list-ol" aria-hidden="true"></i></button>
+            <button id="ul" class="btn-ii drop-button" type="button" ><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+<!--            <button id="block" type="button" onclick="addBlockquote();"><b>&#34;  &#34;</b></button>-->
+        </div>
+
+        <div class="edit-item i flex flex-hor">
+            <button id="link" class="btn-ii drop-button" type="button"><i class="fa fa-link" aria-hidden="true"></i></button>
+            <button id="unlink" class="btn-ii drop-button" type="button"><i class="fa fa-chain-broken" aria-hidden="true"></i></button>
+            <button class="btn-ii" class="btn-ii drop-button" id="image" type="button" ><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+            <!--<button id="image" type="button" onclick="showVideoDialog();">Video</button>-->
+        </div>
+    </div> <!--end edit container-->
+
+    
+</div> <!-- end editor wrap -->
+
+<span id="postid-hidden" style="position: absolute; top: -110em; display: none;"><?= $postid ?></span>
+<span id="is-draft-hidden" style="position: absolute; top: -110em; display: none;"><?= $isDraft ?></span>
+
+<!-- img modal -->
+<dialog id="img-dialog" class="img-dialog" data-mode="img">
+    <div class="dialog-container">
+        <div class="img-dialog-title">
+            <div class="featured">Featured Image</div>
+            <div class="regular">Image</div>
+            <div class="category">Category Image</div>
+        </div>
+        <p style="text-align: center;">Please choose an image to upload</p>
+        <div style="width: 120px; height: 120px; display: block; border: 1px dotted black; position: relative; padding: 1px;
+                    text-align: center;">
+            <img id="upload-preview" src="" alt="image preview" style="max-height: 100%; max-width: 100%; object-fit: contain;
+                position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        </div>
+        <div class="img-form-wrapper">
+            <form method="post" id="image-form" name="image-form" >
+                <input type="file" accept="image/*" name="imgfile[]" id="upload-image-holder">
+                <div>
+                    <button id="img-dialog-upload" class="img-dialog-upload" class="exit-dialog" type="submit">Done</button>
+                    <button id="img-dialog-close" class="img-dialog-upload" class="exit-dialog" type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</dialog>
+
+<div id="frame" class="change-watch">
+    <div contenteditable="true" id="content">
+        <div>
+            <?php if ($postcontent == "") { ?>
+            <?php } else { ?>
+            <?= $postcontent ?>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+<div id="colors-modal" class="colors-modal">
+    <div id="colorpicker" class="colorpicker">
+        <div class="color-chooser-grays flex flex-hor">
+            <?php for ($r = 0; $r <= 256; $r += 64) { ?>
+                <?php if ($r == 256) { $r = 255; } ?>
+                <?php writeColorChooseSingle($r, $r, $r, 0); ?>
+            <?php } ?>
+        </div>
+        <div class="color-chooser-primaries flex flex-hor">
+            <?php writeColorChooseSingle(255, 0, 0, 0); ?>
+            <?php writeColorChooseSingle(255, 165, 0, 0); ?>
+            <?php writeColorChooseSingle(255, 255, 0, 0); ?>
+            <?php writeColorChooseSingle(0, 255, 0, 0); ?>
+            <?php writeColorChooseSingle(0, 255, 255, 0); ?>
+            <?php writeColorChooseSingle(0, 0, 255, 0); ?>
+            <?php writeColorChooseSingle(128, 0, 128, 0); ?>
+            <?php writeColorChooseSingle(255, 0, 255, 0); ?>
+        </div>
+        <div class="color-chooser-shades flex flex-hor">
+    <!--        RED-->
+            <div class="color-chooser-shades-drop flex flex-vert">
+                <?php writeColorChooseDrop(255, 0, 0, $grayFactor); ?>
+            </div>
+    <!--        ORANGE-->
+            <div class="color-chooser-shades-drop flex flex-vert">
+                <?php writeColorChooseDrop(255, 165, 0, $grayFactor); ?>
+            </div>
+    <!--        YELLOW-->
+            <div class="color-chooser-shades-drop flex flex-vert">
+                <?php writeColorChooseDrop(255, 255, 0, $grayFactor); ?>
+            </div>
+    <!--        GREEN-->
+            <div class="color-chooser-shades-drop flex flex-vert">
+                <?php writeColorChooseDrop(0, 255, 0, $grayFactor); ?>
+            </div>
+    <!--        CYAN-->
+            <div class="color-chooser-shades-drop flex flex-vert">
+                <?php writeColorChooseDrop(0, 255, 255, $grayFactor); ?>
+            </div>
+    <!--        BLUE-->
+            <div class="color-chooser-shades-drop flex flex-vert">
+                <?php writeColorChooseDrop(0, 0, 255, $grayFactor); ?>
+            </div>
+    <!--        PURPLE-->
+            <div class="color-chooser-shades-drop flex flex-vert">
+                <?php writeColorChooseDrop(128, 0, 128, $grayFactor); ?>
+            </div>
+    <!--        MAGENTA-->
+            <div class="color-chooser-shades-drop flex flex-vert">
+                <?php writeColorChooseDrop(255, 0, 255, $grayFactor); ?>
+            </div>
+            
+        </div>
+
+    </div>
+    
+</div>
+
+<?php include (SRC_DIR . 'html/dashboard/templates.html'); ?>
+

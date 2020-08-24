@@ -1,0 +1,15 @@
+.your-posts {
+    .post-info-wrapper {
+        padding: 12px 0;
+        .title {
+            color: $blue;
+            font-size: $font-size-medium;
+        }
+        .content {
+            
+        }
+        .id {
+            display: none;
+        }
+    }
+}

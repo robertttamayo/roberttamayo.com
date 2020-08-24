@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Hind|Press+Start+2P" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="http://www.roberttamayo.com/assets/css/min/core.min.css">
+    <link rel="stylesheet" type="text/css" href="https://www.roberttamayo.com/assets/css/min/core.min.css">
 </head>
 <body class="page-about">
     <div class="about-title">
@@ -52,6 +52,8 @@
                     <br><br>
                     7. Coffee by Haik Dettmann from the Noun Project — White coloring was added to the coffee mug
                     8. Mushroom by Haik Dettmann from the Noun Project — Coloring added to the mushroom
+                    9. Right by Ilaria Bernareggi, IT from the Noun Project
+                    10. Alien by Ilaria Bernareggi, IT from the Noun Project
                 </div>
             </div>
             
@@ -67,5 +69,6 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/assets/js/site.js"></script>
+    <script src="/blog/public/assets/js/module/Stats.js"></script>
 </body>
 </html>

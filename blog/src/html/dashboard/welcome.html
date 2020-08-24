@@ -1,0 +1,51 @@
+<div class="your-posts-wrapper">
+    <div class="your-posts flex flex-vert">
+        <div class="quick-actions">
+            <div></div>
+        </div>
+        <div class="welcome-posts-wrapper">
+        <?php for ($i = 0; $i < sizeof($posts); $i++) { ?>            
+            <div class="post-info-wrapper flex flex-hor">
+                
+                <div class="post-info" data-postid="<?= $posts[$i]->id ?>">
+                    <div class="title"><?= $posts[$i]->title ?></div>
+                    <div class="author"><?= $posts[$i]->author;?></div>
+                    <div class="shortpreview"><?= strip_tags($posts[$i]->shortpreview) ;?></div>
+                </div>
+                
+                <div class="post-info-buttons container flex flex-hor">
+                    <div class="btn post-edit" data-postid="<?= $posts[$i]->id ?>">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </div>
+                    
+                    <?php if ($posts[$i]->draft) { ?>
+                        <div class="btn post-stats" data-postid="<?= $posts[$i]->id ?>">
+                            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                        </div>
+                    <?php } else { ?>
+                        <div class="btn post-stats" data-postid="<?= $posts[$i]->id ?>">
+                            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                        </div>
+                    <?php } ?>
+                    
+                    <div class="btn post-delete" data-postid="<?= $posts[$i]->id ?>">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>
+                    
+                </div>
+                <?php if ($posts[$i]->draft) { ?>
+                    <div class="draft"><i class="fa fa-wrench" aria-hidden="true"></i> Draft</div>
+                <?php } else { ?>
+                    <div class="public">
+                        <i class="fa fa-globe" aria-hidden="true"></i> Published
+                        <span class="publishdate"><?= formatDateForWelcome($posts[$i]->publishdate); ?></span>
+                    </div>
+<!--                    <div class="publishdate"><?= $posts[$i]->publishdate;?></div>-->
+<!--                    <div class="lastedited"><?= $posts[$i]->lastedited ;?></div>-->
+                <?php } ?>
+                
+            </div>
+        <?php } ?>
+        </div>
+    </div>
+</div>

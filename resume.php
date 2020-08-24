@@ -4,7 +4,7 @@
     <title>Robert Tamayo — Web Developer, Game Developer, Programmer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Hind|Press+Start+2P" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="http://www.roberttamayo.com/assets/css/min/core.min.css">
+    <link rel="stylesheet" type="text/css" href="https://www.roberttamayo.com/assets/css/min/core.min.css">
 </head>
 <body class="page-resume">
     <div class="resume-section">

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Robert Tamayo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="canonical" href="https://www.roberttamayo.com/"/>
 
     <link href="https://fonts.googleapis.com/css?family=Hind|Press+Start+2P" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="http://www.roberttamayo.com/assets/css/min/core.min.css">
+    <link rel="stylesheet" type="text/css" href="https://www.roberttamayo.com/assets/css/min/core.min.css">
+    <link rel="icon" type="image/png" href="https://www.roberttamayo.com/assets/images/skullicon3.png">
+
 </head>
-<body class="page-index night">
+<body class="page-index">
     <div class="top">
         <div class="items">
             <div class="icon shield"></div>

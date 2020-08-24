@@ -53,6 +53,9 @@ body * {
 .items .coffee {
   background-image: url(/assets/images/coffee.png);
 }
+.items .potion {
+  background-image: url(/assets/images/potion.svg);
+}
 
 .hearts {
   display: -webkit-box;

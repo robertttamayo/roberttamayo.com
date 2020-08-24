@@ -25,7 +25,8 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'assets/css/core.css': 'assets/sass/core.scss',
-                    'assets/css/blog.css': 'assets/sass/blog.scss'
+                    'assets/css/blog.css': 'assets/sass/blog.scss',
+                    'assets/css/alt.css': 'assets/sass/alt.scss'
                 }
             }
         },
@@ -39,24 +40,25 @@ module.exports = function(grunt) {
                 files: {
                     'assets/css/min/core.min.css': ['assets/css/core.css'],
                     'assets/css/min/blog.min.css': ['assets/css/blog.css'],
+                    'assets/css/min/alt.min.css': ['assets/css/alt.css'],
                 }
             }
         },
         
-        copy: {
-            blog_core: {
-                expand: true,
-                flatten: false,
-                cwd: 'vendor/rtamayo/bobblog/',
-                src: '**',
-                dest: 'blog/'
-            }
-        },
+        // copy: {
+        //     blog_core: {
+        //         expand: true,
+        //         flatten: false,
+        //         cwd: 'vendor/rtamayo/bobblog/',
+        //         src: '**',
+        //         dest: 'blog/'
+        //     }
+        // },
 
         //run tasks again on changes in js and css files
         watch: {
           files: ['Gruntfile.js', 'assets/css/*.css', 'assets/sass/*.scss', 'assets/css/sass/*.scss', 'assets/js/*.js'],
-          tasks: ['uglify', 'sass', 'cssmin', 'copy']
+          tasks: ['uglify', 'sass', 'cssmin']
         },
 
     });
@@ -67,6 +69,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['uglify', 'sass', 'cssmin', 'copy', 'watch']);
+    grunt.registerTask('default', ['uglify', 'sass', 'cssmin', 'watch']);
 
 };

@@ -1,0 +1,21 @@
+<div class="tags-pop-wrap">
+    <div class="tags-pop">
+        <div class="create-tag-wrap flex flex-hor">
+            <div class="">Create a new tag:</div>
+            <input id="tag-create-input" class="tag-create-input" type="text" placeholder="Tag name">
+            <div class="btn inline create-tag" id="create-tag">Create</div>
+        </div>
+        <div id="tag-name-wrapper" class="tag-name-wrapper flex flex-hor">
+            <div id="active-tags" class="active-tags">
+                <?php for($i = 0; $i < sizeof($all_tags); $i++) { ?>
+                <div class="tag-name 
+                    <?php if ($all_tags[$i]["active"]){
+                            echo "active-tag";
+                     }?>" data-tagid="<?= $all_tags[$i]["id"] ?>">
+                    <?= $all_tags[$i]["name"]?>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>

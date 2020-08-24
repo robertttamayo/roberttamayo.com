@@ -1,2 +1,6 @@
 /vendor/
 /node_modules/
+/blog/vendor/
+/blog/node_modules/
+/blog/.sass-cache*
+*sass-cache*

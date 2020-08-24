@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /bobblog2/
+    # RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . "" [L]
+    #get rid of .php
+    RewriteRule ^index\.php$ "" [R=301,L]
+    RewriteRule ^(.*)index\.php$ /bobblog2/$1/ [R=301,L]
+</IfModule>

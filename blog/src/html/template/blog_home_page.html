@@ -1,0 +1,19 @@
+<div class="blog-posts-wrap flex flex-vert">
+
+    <?php for ($i = 0; $i < sizeof($sorted_posts); $i++) { ?>
+    <?php 
+        if ($posts[$i]->draft) {
+            continue;
+        }
+    ?>
+    <div class="public-post-wrap">
+        <div class="public-post-title">
+            <a href="<?= ROOT . $sorted_posts[$i]->permalink ?>"><?= $sorted_posts[$i]->title ?></a>
+        </div>
+        <div class="public-post-content">
+            <?= $sorted_posts[$i]->content ?>
+        </div>
+        <div class="read-more">Read More</div>
+    </div>
+    <?php } ?>
+</div>

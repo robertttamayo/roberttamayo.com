@@ -1,0 +1,14 @@
+html, body, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+body * {
+    box-sizing: border-box;
+}
+button {
+    -webkit-appearance: none;
+}
+ol, ul {
+//    list-style-type: none;
+    list-style-position: inside;
+}

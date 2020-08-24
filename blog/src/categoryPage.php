@@ -1,0 +1,4 @@
+<?php
+
+// DISPLAY ALL POSTS OF A CATEGORY TYPE
+

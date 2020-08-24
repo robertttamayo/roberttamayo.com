@@ -63,7 +63,9 @@ module.exports = function(grunt) {
                     style: 'expanded'
                 },
                 files: {
-                    'assets/css/core.css': 'assets/css/core.scss'
+                    'assets/css/core.css': 'assets/css/core.scss',
+                    'blog/public/assets/css/core.css': 'blog/public/assets/css/core.scss',
+                    'blog/assets/css/core.css': 'blog/assets/css/core.scss'
                 }
             }
         },
@@ -76,13 +78,26 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'assets/css/min/core.min.css': ['assets/css/*.css'],
+                    'blog/public/assets/css/min/core.min.css': ['blog/public/assets/css/core.css'],
+                    'blog/assets/css/min/core.min.css': ['blog/assets/css/core.css'],
                 }
             }
         },
 
         //run tasks again on changes in js and css files
         watch: {
-          files: ['<%= concat.core.src %>', 'Gruntfile.js', 'assets/css/*.css', 'assets/css/*.scss', 'assets/css/sass/*.scss'],
+            files: [
+                '<%= concat.core.src %>',
+                'Gruntfile.js',
+                './assets/css/*.css',
+                './assets/css/*.scss',
+                './assets/css/sass/*.scss',
+                './public/',
+                'blog/assets/css/*.scss',
+                'blog/assets/css/sass/*.scss',
+                'blog/public/assets/css/*.scss',
+                'blog/public/assets/css/sass/*.scss',
+            ],
           tasks: ['concat', 'uglify', 'sass', 'cssmin']
         },
 

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGA,IAAK;EACD,UAAU,ECCL,OAAO;EDAZ,KAAK,ECEC,OAAO;EDDb,WAAW,EAAE,UAAU;EACvB,OAAO,EAAE,CAAC;EACV,MAAM,EAAE,CAAC;;AACT,MAAE;EACE,UAAU,EAAE,UAAU",
+"sources": ["../sass/alt.scss","../sass/_colors.scss"],
+"names": [],
+"file": "alt.css"
+}

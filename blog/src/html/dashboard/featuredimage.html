@@ -1,0 +1,16 @@
+<div class="featured-image-pop-wrap">
+    <div class="featured-image-pop">
+        <div class="featured-image-upload-preview">
+            <img src="<?= $featured_image ?>">
+        </div>
+        <div class="featured-img-form-wrapper">
+            <form method="post" id="featured-image-form" name="featured-image-form" >
+                <input type="file" accept="image/*" name="imgfile[]" id="upload-featured-image-holder">
+                <div>
+                    <button id="featured-img-dialog-upload" class="img-dialog-upload" class="exit-dialog" type="submit">Done</button>
+                    <button id="featured-img-dialog-close" class="img-dialog-upload" class="exit-dialog" type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

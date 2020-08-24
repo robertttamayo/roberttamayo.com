@@ -35,6 +35,9 @@ body {
     .coffee {
         background-image: url(/assets/images/coffee.png);
     }
+    .potion {
+        background-image: url(/assets/images/potion.svg);
+    }
 }
 .hearts {
     @include flex();

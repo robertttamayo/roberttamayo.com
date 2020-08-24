@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <title><?= $bb->title() ?></title>
+    
+    <!-- CSS -->
+    <?= $bb->headStyles() ?>
+    
+    <!-- JS -->
+    <?= $bb->headScripts() ?>
+    
+</head>
+    
+<body>
+    
+    <div class="login-form-wrapper">
+        <div class="login-form">
+            <form id="login-form" method="post" action="login.php">
+                <input type="text" value="" name="username" placeholder="Username">
+                <input type="password" value="" name="password" placeholder="Password">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+    
+</html>

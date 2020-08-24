@@ -1,0 +1,52 @@
+.your-posts {
+    
+    .post-info-wrapper {
+        justify-content: space-between;
+        align-items: center;
+        width: 644px;
+        margin: auto;
+        margin-bottom: 24px;
+        padding: 24px;
+        border-radius: 24px;
+        box-shadow: 0 0 4px 0 $outset-gray;
+        min-height: 74px;
+
+//        background: transparent;
+//        box-shadow: 0 0 4px 0 transparent;
+//        border-radius: $rounded;
+
+        transition: all .2s;
+        .post-info {
+            border-right: 1px solid $light-gray;
+            padding: 12px 12px 12px 0px;
+            width: 260px;
+        }
+        .post-info-buttons {
+            width: 200px;
+            text-align: center;
+            justify-content: space-between;
+            background: transparent;
+            box-shadow: none;
+            
+            transition: all .2s;
+            opacity: 100;
+            
+            .btn {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        &:hover {
+            background: $light-gray;
+            .post-info {
+                border-right: 1px solid $gray;
+            }
+//            box-shadow: 0 0 4px 0 $outset-gray;
+
+            .post-info-buttons {
+                opacity: 100;
+            }
+        }
+    }
+}
