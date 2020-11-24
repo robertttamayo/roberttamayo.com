@@ -160,6 +160,14 @@ header {
   height: 240px;
   background: #565656;
 }
+@media (prefers-color-scheme: light) {
+  header {
+    background: #cecece;
+  }
+  header .page-title {
+    color: black;
+  }
+}
 
 .redcodebluecode {
   padding: 15px;
@@ -609,6 +617,14 @@ body.code-light-theme .formatted .tags {
   color: #333;
   margin-left: auto;
   margin-right: auto;
+}
+@media (prefers-color-scheme: light) {
+  .blog-post-wrapper {
+    background: #cecece;
+  }
+  .blog-post-wrapper .blog-post {
+    color: #333;
+  }
 }
 
 .blog-post {

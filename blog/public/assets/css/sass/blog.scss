@@ -18,6 +18,12 @@
     color: $rbdarkgray;
     margin-left: auto;
     margin-right: auto;
+    @media(prefers-color-scheme: light) {
+        background: $rbwhite;
+        .blog-post {
+            color: $rbdarkgray;
+        }
+    }
 }
 .blog-post {
     color: $rblightgray;

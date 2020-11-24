@@ -218,7 +218,22 @@ body {
         }
     }
 }
-
+body {
+    @media(prefers-color-scheme: dark) {
+        .background {
+            background: midnightblue;
+        }
+        .ground {
+            background: #004100;
+        }
+        .cloud {
+            opacity: .5;
+        }
+        .title-back {
+            background: palegoldenrod;
+        }
+    }
+}
 
 
 .dino {
@@ -314,6 +329,12 @@ body.page-about {
 }
 
 .night {
+    a.button-wrap .button,
+    a.button-wrap {
+        color: #ddd;
+    }
+}
+@media(prefers-color-scheme: dark) {
     a.button-wrap .button,
     a.button-wrap {
         color: #ddd;

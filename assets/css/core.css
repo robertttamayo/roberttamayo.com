@@ -253,6 +253,21 @@ body.night .title-back {
   background: palegoldenrod;
 }
 
+@media (prefers-color-scheme: dark) {
+  body .background {
+    background: midnightblue;
+  }
+  body .ground {
+    background: #004100;
+  }
+  body .cloud {
+    opacity: .5;
+  }
+  body .title-back {
+    background: palegoldenrod;
+  }
+}
+
 .dino {
   position: absolute;
   top: 500px;
@@ -359,6 +374,12 @@ body.page-about {
   color: #ddd;
 }
 
+@media (prefers-color-scheme: dark) {
+  a.button-wrap .button,
+  a.button-wrap {
+    color: #ddd;
+  }
+}
 .page-resume {
   background: #efefef;
 }
