@@ -615,6 +615,7 @@ body.code-light-theme .formatted .tags {
   color: #999;
   max-width: 800px;
   margin: auto;
+  line-height: 1.5;
 }
 
 .blog-post-wrapper h1, .blog-post-wrapper h2, .blog-post-wrapper h3, .blog-post-wrapper h4, .blog-post-wrapper h5, .blog-post-wrapper h6 {
@@ -622,6 +623,7 @@ body.code-light-theme .formatted .tags {
   padding: 20px;
   text-align: center;
   display: block;
+  line-height: 1;
 }
 .blog-post-wrapper[data-style="0"] h1, .blog-post-wrapper[data-style="0"] h2, .blog-post-wrapper[data-style="0"] h3, .blog-post-wrapper[data-style="0"] h4, .blog-post-wrapper[data-style="0"] h5, .blog-post-wrapper[data-style="0"] h6 {
   background: #de7c62;

@@ -23,6 +23,7 @@
     color: $rblightgray;
     max-width: 800px;
     margin: auto;
+    line-height: 1.5;
 }
 .blog-post-wrapper {
     h1, h2, h3, h4, h5, h6 {
@@ -30,6 +31,7 @@
         padding: 20px;
         text-align: center;
         display: block;
+        line-height: 1;
     }
     &[data-style="0"] {
         h1, h2, h3, h4, h5, h6 {
