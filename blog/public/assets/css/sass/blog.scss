@@ -7,6 +7,12 @@
     margin: auto;
 }
 
+body:not(.october) {
+    .blog-skull-image, .blog-skull-image-desktop {
+        display: none;
+    }
+}
+
 .img-editor-bar {
     display: none !important;
 }

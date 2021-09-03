@@ -253,17 +253,29 @@ body.night .title-back {
   background: palegoldenrod;
 }
 
+body.night-mode .background {
+  background: midnightblue;
+}
+body.night-mode .ground {
+  background: #004100;
+}
+body.night-mode .cloud {
+  opacity: .5;
+}
+body.night-mode .title-back {
+  background: palegoldenrod;
+}
 @media (prefers-color-scheme: dark) {
-  body .background {
+  body:not(.day-mode) .background {
     background: midnightblue;
   }
-  body .ground {
+  body:not(.day-mode) .ground {
     background: #004100;
   }
-  body .cloud {
+  body:not(.day-mode) .cloud {
     opacity: .5;
   }
-  body .title-back {
+  body:not(.day-mode) .title-back {
     background: palegoldenrod;
   }
 }
@@ -374,9 +386,14 @@ body.page-about {
   color: #ddd;
 }
 
+body.night-mode a.button-wrap .button,
+body.night-mode a.button-wrap {
+  color: #ddd;
+}
+
 @media (prefers-color-scheme: dark) {
-  a.button-wrap .button,
-  a.button-wrap {
+  body:not(.day-mode) a.button-wrap .button,
+  body:not(.day-mode) a.button-wrap {
     color: #ddd;
   }
 }
