@@ -3,12 +3,9 @@
 <head>
     <title>Robert Tamayo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="dark light">
-    <link rel="canonical" href="https://www.roberttamayo.com/"/>
-
     <link href="https://fonts.googleapis.com/css?family=Hind|Press+Start+2P" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://www.roberttamayo.com/assets/css/min/core.min.css">
-    <link rel="icon" type="image/png" href="https://www.roberttamayo.com/assets/images/skullicon3.png">
+    <link rel="stylesheet" type="text/css" href="/assets/css/min/core.min.css">
+    <link rel="icon"  type="image/png" href="/assets/icon/favicon.ico">
 </head>
 <body class="page-index">
     <div class="top">
@@ -40,7 +37,7 @@
             <div class="button">Portfolio</div>
         </a>
 -->
-        <a class="button-wrap active" href="http://www.redcodebluecode.com/">
+        <a class="button-wrap active" href="http://www.roberttamayo.com/blog/">
             <div class="icon"></div>
             <div class="button">Blog</div>
         </a>
@@ -68,5 +65,10 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/assets/js/site.js"></script>
+    <style>
+    .night a.button-wrap .button, .night a.button-wrap {
+    	color: #ddd;
+    }
+    </style>
 </body>
 </html>

@@ -219,7 +219,7 @@ body {
     }
 }
 body {
-    @media(prefers-color-scheme: dark) {
+    &.night-mode {
         .background {
             background: midnightblue;
         }
@@ -231,6 +231,22 @@ body {
         }
         .title-back {
             background: palegoldenrod;
+        }
+    }
+    @media(prefers-color-scheme: dark) {
+        &:not(.day-mode) {
+            .background {
+                background: midnightblue;
+            }
+            .ground {
+                background: #004100;
+            }
+            .cloud {
+                opacity: .5;
+            }
+            .title-back {
+                background: palegoldenrod;
+            }
         }
     }
 }
@@ -334,9 +350,17 @@ body.page-about {
         color: #ddd;
     }
 }
-@media(prefers-color-scheme: dark) {
+body.night-mode {
     a.button-wrap .button,
     a.button-wrap {
         color: #ddd;
+    }
+}
+@media(prefers-color-scheme: dark) {
+    body:not(.day-mode) {
+        a.button-wrap .button,
+        a.button-wrap {
+            color: #ddd;
+        }
     }
 }

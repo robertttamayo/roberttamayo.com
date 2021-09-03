@@ -17,6 +17,14 @@ header {
         }
     }
 }
+body.day-theme {
+    header {
+        background: $rbwhite;
+        .page-title {
+            color: black;
+        }
+    }
+}
 
 .redcodebluecode {
     padding: 15px;

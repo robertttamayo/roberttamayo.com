@@ -48,16 +48,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        
-        // copy: {
-        //     blog_core: {
-        //         expand: true,
-        //         flatten: false,
-        //         cwd: 'vendor/rtamayo/bobblog/',
-        //         src: '**',
-        //         dest: 'blog/'
-        //     }
-        // },
 
         //run tasks again on changes in js and css files
         watch: {
@@ -80,7 +70,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-sass');
-    // grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', ['uglify', 'sass', 'cssmin', 'watch']);
