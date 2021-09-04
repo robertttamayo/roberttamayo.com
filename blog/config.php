@@ -73,3 +73,9 @@ if (isset($_POST["action"])) {
     include(SRC_DIR . "actionHandler.php");
     handle($_POST["action"]);
 }
+$blog_class_name = '';
+if (isset($_GET["layout"])) {
+    if ($_GET["layout"] === "october") {
+        $blog_class_name .= " october";
+    }
+}

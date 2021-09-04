@@ -33,7 +33,7 @@
         <!-- <script defer src="https://use.fontawesome.com/releases/v5.10.2/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.10.2/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script> -->
     </head>
-    <body>
+    <body class="<?= $blog_class_name ?>">
         
         <header>
             <div class="blog-skull-image">
@@ -112,6 +112,14 @@
             </div>
         </script>
 <!--        <script src="/assets/js/core.js"></script>-->
-        
+        <script>
+            $(document).ready(function(){
+                if ($('body').hasClass('october')) {
+                    $('.blogfeed-item a').each(function(){
+                        $(this).attr('href', $(this).attr('href') + '&layout=october');
+                    });
+                }
+            });
+        </script>
     </body>
 </html>

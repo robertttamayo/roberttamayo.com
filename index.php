@@ -51,6 +51,11 @@
             <div class="icon"></div>
             <div class="button">About</div>
         </a>
+
+        <a class="button-wrap" href="/index.october.html">
+            <div class="icon"></div>
+            <div class="button">Halloween<br>Theme</div>
+        </a>
         
     </div>
     

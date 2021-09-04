@@ -2,6 +2,9 @@ body {
     font-family: $sans;
     background: black;
     &.october {
+        .redcodebluecode {
+            display: none;
+        }
         /* from october index.html */
         background: black;
         margin: 0;
@@ -17,6 +20,7 @@ body {
             color: #ff7a00;
             margin-bottom: 0;
             text-align: center;
+            opacity: 1;
         }
         h2 {
             font-family: "Bowlby One SC",sans-serif;
@@ -113,6 +117,7 @@ body {
             position: relative;
             min-height: 240px;
             background: transparent;
+            height: auto;
         }
         .blog-skull-image {
             display: none;
@@ -153,6 +158,7 @@ body {
             font-family: $font-skull;
             width: 100%;
             height: 100%;
+            position: static;
             @media(max-width: $screen-sm-max) {
                 position: absolute;
                 margin-top: 0;
@@ -305,6 +311,26 @@ body {
             }
             color: black;
         }
+        .blog-post-wrapper {
+            &[data-style="0"] a {
+                color: $skull-magenta;
+            }
+            &[data-style="1"] a {
+                color: $skull-blue;
+            }
+            &[data-style="2"] a {
+                color: $skull-green-darker;
+            }
+            &[data-style="3"] a {
+                color:$skull-orange-darker;
+            }
+        }
+        .blog-post-wrapper[data-style] h2 {
+            background: black;
+            font-weight: normal;
+            padding: 20px;
+            font-size: 30px;
+        }
         .blog-h1 {
             padding: 0;
             font-family: $font-skull;
@@ -318,6 +344,9 @@ body {
             margin:0;
             padding:0;
             font-size: 30px;
+            color: black;
+            letter-spacing: normal;
+            text-align: left;
         }
         .blog-post-meta {
             font-family: $font-skull;
